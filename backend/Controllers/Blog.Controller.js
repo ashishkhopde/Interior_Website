@@ -43,7 +43,7 @@ export const getBlogById = async (req, res) => {
     }
 }
 
-const updateBlog = async (req, res) => {
+export const updateBlog = async (req, res) => {
     try {
         const { id } = req.params;
         const { title, description, image, author, tags } = req.body;
