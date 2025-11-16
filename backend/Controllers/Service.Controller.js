@@ -42,3 +42,31 @@ export const getServiceById = async (req, res) => {
         res.status(500).json({ message: "Server Error" });
     }
 }
+
+export const updateService = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { title, description, icon } = req.body;
+        const updatedService = await ServiceModel.findByIdAndUpdate(id, { title, description, icon }, { new: true });
+        res.status(200).json({
+            message: "Service updated successfully",
+            service: updatedService
+        });
+    } catch(err) {
+        console.log("Error in updating service:", err);
+        res.status(500).json({  message: "Server Error" });
+    }   
+}
+
+export const deleteService = async (req, res) => {
+    try {
+        const { id } = req.params;
+        await ServiceModel.findByIdAndDelete(id);
+        res.status(200).json({
+            message: "Service deleted successfully"
+        });
+    } catch(err) {
+        console.log("Error in deleting service:", err);
+        res.status(500).json({ message: "Server Error" });
+    }
+}

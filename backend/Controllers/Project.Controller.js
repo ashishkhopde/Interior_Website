@@ -47,3 +47,34 @@ export const getProjectById = async (req, res) => {
         res.status(500).json({ message: "Server Error" });
     }
 }
+
+export const deleteProjectById = async (req, res) => {
+    try {
+        const {id} = req.params;
+        await ProjectModel.findByIdAndDelete(id);
+        res.status(200).json({
+            message: "Post deleted successfully"
+        });
+    }catch(err){
+        console.log("Error in deleting post:", err);
+        res.status(500).json({ message: "Server Error" });
+    } 
+}
+
+export const updateProjectById = async (req, res) => {
+    try {
+        const {id} = req.params;
+        const { clint, year, author, image, description, pojectTitle } = req.body;          
+        const updatedProject = await ProjectModel.findByIdAndUpdate(
+            id,
+            { clint, year, author, image, description, pojectTitle }
+        );  
+        res.status(200).json({
+            message: "Post updated successfully",
+            project: updatedProject
+        });
+    }catch(err){
+        console.log("Error in updating post:", err);
+        res.status(500).json({ message: "Server Error" });
+    }   
+}
