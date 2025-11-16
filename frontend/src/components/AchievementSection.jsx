@@ -74,7 +74,7 @@ export default function AchievementSection() {
                   viewport={{ once: true }}
                   custom={0.8}
                 >
-                  <Link to="/about" className="theme-btn bg-transparent">
+                  <Link to="/about" className="theme-btn bg-transparent" onClick={()=>scrollTo(0,0)}>
                     Read More <i className="fas fa-long-arrow-right"></i>
                   </Link>
                 </motion.div>

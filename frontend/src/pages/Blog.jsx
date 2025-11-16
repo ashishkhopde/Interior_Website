@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import CtaSection from '../components/CtaSection'
 import Footer from '../components/Footer'
 import BreadcrumbContact from '../components/BreadcrumbSection'
+import { Link } from 'react-router-dom';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -83,9 +84,9 @@ export default function Blog() {
                       to invest and save effectively.
                     </p>
 
-                    <a href="news-details.html" className="link-btn">
+                    <Link to="/blog-details" className="link-btn" onClick={()=>scrollTo(0,0)}>
                       Load More <i className="far fa-plus"></i>
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </motion.div>

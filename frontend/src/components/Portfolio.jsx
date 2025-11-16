@@ -4,6 +4,7 @@ import Swiper from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation, Autoplay } from "swiper/modules";
+import { Link } from "react-router-dom";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 50 },
@@ -103,9 +104,9 @@ export default function PortfolioSection() {
                     }}
                   >
                     <div className="portfolio-content">
-                      <a href="project-details.html" className="icon">
-                        <i className="fas fa-long-arrow-right"></i>
-                      </a>
+                      <Link to ="/project-details" className="icon" onClick={()=>scrollTo(0,0)}>
+                        <i className="fas fa-long-arrow-right" ></i>
+                      </Link>
                       <h3>
                         <a href="project-details.html">Interior Perfection</a>
                       </h3>
@@ -129,9 +130,9 @@ export default function PortfolioSection() {
                     }}
                   >
                     <div className="portfolio-content">
-                      <a href="project-details.html" className="icon">
-                        <i className="fas fa-long-arrow-right"></i>
-                      </a>
+                      <Link to ="/project-details" className="icon" onClick={()=>scrollTo(0,0)}>
+                        <i className="fas fa-long-arrow-right" ></i>
+                      </Link>
                       <h3>
                         <a href="project-details.html">Interior Perfection</a>
                       </h3>
@@ -155,9 +156,9 @@ export default function PortfolioSection() {
                     }}
                   >
                     <div className="portfolio-content">
-                      <a href="project-details.html" className="icon">
-                        <i className="fas fa-long-arrow-right"></i>
-                      </a>
+                      <Link to ="/project-details" className="icon" onClick={()=>scrollTo(0,0)}>
+                        <i className="fas fa-long-arrow-right" ></i>
+                      </Link>
                       <h3>
                         <a href="project-details.html">Interior Perfection</a>
                       </h3>
@@ -181,9 +182,9 @@ export default function PortfolioSection() {
                     }}
                   >
                     <div className="portfolio-content">
-                      <a href="project-details.html" className="icon">
-                        <i className="fas fa-long-arrow-right"></i>
-                      </a>
+                      <Link to ="/project-details" className="icon" onClick={()=>scrollTo(0,0)}>
+                        <i className="fas fa-long-arrow-right" ></i>
+                      </Link>
                       <h3>
                         <a href="project-details.html">Interior Perfection</a>
                       </h3>

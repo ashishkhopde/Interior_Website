@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Footer from '../components/Footer'
 import CtaSection from '../components/CtaSection'
 import BreadcrumbContact from '../components/BreadcrumbSection'
+import { Link } from 'react-router-dom';
 
 const fadeUp = {
     hidden: { opacity: 0, y: 40 },
@@ -57,9 +58,9 @@ export default function Projects() {
                                         style={{ backgroundImage: `url('${img}')` }}
                                     >
                                         <div className="portfolio-content">
-                                            <a href="project-details.html" className="icon">
+                                            <Link to="/project-details" className="icon" onClick={()=>scrollTo(0,0)}>
                                                 <i className="fas fa-long-arrow-right"></i>
-                                            </a>
+                                            </Link>
                                             <h3>
                                                 <a href="project-details.html">Interior Perfection</a>
                                             </h3>

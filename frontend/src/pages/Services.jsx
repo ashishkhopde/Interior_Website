@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Footer from '../components/Footer'
 import CtaSection from '../components/CtaSection'
 import BreadcrumbContact from '../components/BreadcrumbSection'
+import { Link } from 'react-router-dom';
 
 const fadeUp = {
     hidden: { opacity: 0, y: 40 },
@@ -51,9 +52,9 @@ export default function Services() {
                                         <a href="service-details.html">Architecture Plus</a>
                                     </h3>
                                     <p>This category focuses on the design and man</p>
-                                    <a href="service-details.html" className="link-btn">
+                                    <Link to="/service-details" className="link-btn" onClick={()=>scrollTo(0,0)}>
                                         Read More <i className="fas fa-long-arrow-right"></i>
-                                    </a>
+                                    </Link>
                                 </div>
                             </div>
                         </motion.div>
@@ -77,9 +78,9 @@ export default function Services() {
                                         <a href="service-details.html">Urban Oasis</a>
                                     </h3>
                                     <p>This category focuses on the design and man</p>
-                                    <a href="service-details.html" className="link-btn">
+                                    <Link to="/service-details" className="link-btn" onClick={()=>scrollTo(0,0)}>
                                         Read More <i className="fas fa-long-arrow-right"></i>
-                                    </a>
+                                    </Link>
                                 </div>
                             </div>
                         </motion.div>
@@ -103,9 +104,9 @@ export default function Services() {
                                         <a href="service-details.html">Blueprint Builders</a>
                                     </h3>
                                     <p>This category focuses on the design and man</p>
-                                    <a href="service-details.html" className="link-btn">
+                                    <Link to="/service-details" className="link-btn" onClick={()=>scrollTo(0,0)}>
                                         Read More <i className="fas fa-long-arrow-right"></i>
-                                    </a>
+                                    </Link>
                                 </div>
                             </div>
                         </motion.div>
@@ -129,9 +130,9 @@ export default function Services() {
                                         <a href="service-details.html">Room Layout</a>
                                     </h3>
                                     <p>This category focuses on the design and man</p>
-                                    <a href="service-details.html" className="link-btn">
+                                    <Link to="/service-details" className="link-btn" onClick={()=>scrollTo(0,0)}>
                                         Read More <i className="fas fa-long-arrow-right"></i>
-                                    </a>
+                                    </Link>
                                 </div>
                             </div>
                         </motion.div>
@@ -155,9 +156,9 @@ export default function Services() {
                                         <a href="service-details.html">Textile Design</a>
                                     </h3>
                                     <p>This category focuses on the design and man</p>
-                                    <a href="service-details.html" className="link-btn">
+                                    <Link to="/service-details" className="link-btn" onClick={()=>scrollTo(0,0)}>
                                         Read More <i className="fas fa-long-arrow-right"></i>
-                                    </a>
+                                    </Link>
                                 </div>
                             </div>
                         </motion.div>
@@ -181,9 +182,9 @@ export default function Services() {
                                         <a href="service-details.html">Lighting Fixtures</a>
                                     </h3>
                                     <p>This category focuses on the design and man</p>
-                                    <a href="service-details.html" className="link-btn">
+                                    <Link to="/service-details" className="link-btn" onClick={()=>scrollTo(0,0)}>
                                         Read More <i className="fas fa-long-arrow-right"></i>
-                                    </a>
+                                    </Link>
                                 </div>
                             </div>
                         </motion.div>
@@ -207,9 +208,9 @@ export default function Services() {
                                         <a href="service-details.html">Wallpaper Install</a>
                                     </h3>
                                     <p>This category focuses on the design and man</p>
-                                    <a href="service-details.html" className="link-btn">
+                                    <Link to="/service-details" className="link-btn" onClick={()=>scrollTo(0,0)}>
                                         Read More <i className="fas fa-long-arrow-right"></i>
-                                    </a>
+                                    </Link>
                                 </div>
                             </div>
                         </motion.div>
@@ -233,9 +234,9 @@ export default function Services() {
                                         <a href="service-details.html">Custom Shelving</a>
                                     </h3>
                                     <p>This category focuses on the design and man</p>
-                                    <a href="service-details.html" className="link-btn">
+                                    <Link to="/service-details" className="link-btn" onClick={()=>scrollTo(0,0)}>
                                         Read More <i className="fas fa-long-arrow-right"></i>
-                                    </a>
+                                    </Link>
                                 </div>
                             </div>
                         </motion.div>

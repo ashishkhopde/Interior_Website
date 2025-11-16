@@ -4,6 +4,7 @@ import Swiper from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation, Autoplay } from "swiper/modules";
+import { Link } from "react-router-dom";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 50 },
@@ -119,9 +120,9 @@ export default function NewsSection() {
                     </a>
                   </h3>
 
-                  <a href="news-details.html" className="link-btn">
+                  <Link to="/project-details" className="link-btn" onClick={()=>scrollTo(0,0)}>
                     Read More <i className="fas fa-long-arrow-right"></i>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -154,9 +155,9 @@ export default function NewsSection() {
                     </a>
                   </h3>
 
-                  <a href="news-details.html" className="link-btn">
+                  <Link to="/project-details" className="link-btn" onClick={()=>scrollTo(0,0)}>
                     Read More <i className="fas fa-long-arrow-right"></i>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -190,9 +191,9 @@ export default function NewsSection() {
                     </a>
                   </h3>
 
-                  <a href="news-details.html" className="link-btn">
+                  <Link to="/project-details" className="link-btn" onClick={()=>scrollTo(0,0)}>
                     Read More <i className="fas fa-long-arrow-right"></i>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -226,9 +227,9 @@ export default function NewsSection() {
                     </a>
                   </h3>
 
-                  <a href="news-details.html" className="link-btn">
+                  <Link to="/project-details" className="link-btn" onClick={()=>scrollTo(0,0)}>
                     Read More <i className="fas fa-long-arrow-right"></i>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

@@ -21,7 +21,7 @@ export default function ProjectDetails() {
         <div className="ScrollSmoother-content">
 
             {/* Breadcrumb Section */}
-            <BreadcrumbContact name="Service Details" />
+            <BreadcrumbContact name="Project Details" />
 
             {/* Fragment Start */}
             <>

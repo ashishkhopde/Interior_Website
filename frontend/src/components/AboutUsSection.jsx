@@ -163,7 +163,7 @@ export default function AboutUsSection() {
                                     viewport={{ once: true }}
                                     custom={0.9}
                                 >
-                                    <Link to="/about" className="theme-btn">
+                                    <Link to="/about" className="theme-btn" onClick={()=>scrollTo(0,0)}>
                                         Read More
                                         <i className="fas fa-long-arrow-right"></i>
                                     </Link>
