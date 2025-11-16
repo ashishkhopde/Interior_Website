@@ -99,7 +99,7 @@ export default function Home() {
                                                         <a href="service-details.html">Architecture Plus</a>
                                                     </h3>
                                                     <p>This category focuses on the design and man</p>
-                                                    <Link to="/service-details" className="link-btn">
+                                                    <Link to="/service-details" className="link-btn" onClick={()=>scrollTo(0,0)}>
                                                         Read More <i className="fas fa-long-arrow-right"></i>
                                                     </Link>
                                                 </div>
@@ -125,7 +125,7 @@ export default function Home() {
                                                         <a href="service-details.html">Urban Oasis</a>
                                                     </h3>
                                                     <p>This category focuses on the design and man</p>
-                                                    <Link to="/service-details" className="link-btn">
+                                                    <Link to="/service-details" className="link-btn" onClick={()=>scrollTo(0,0)}>
                                                         Read More <i className="fas fa-long-arrow-right"></i>
                                                     </Link>
                                                 </div>
@@ -151,7 +151,7 @@ export default function Home() {
                                                         <a href="service-details.html">Blueprint Builders</a>
                                                     </h3>
                                                     <p>This category focuses on the design and man</p>
-                                                    <Link to="/service-details" className="link-btn">
+                                                    <Link to="/service-details" className="link-btn" onClick={()=>scrollTo(0,0)}>
                                                         Read More <i className="fas fa-long-arrow-right"></i>
                                                     </Link>
                                                 </div>
@@ -398,7 +398,7 @@ export default function Home() {
 
                             {/* Right Side - Accordion */}
                             <motion.div
-                                className="col-lg-6 mt-5 mt-lg-0"
+                                className="col-lg-6 mt-5 mt-lg-0 "
                                 variants={fadeUp}
                                 initial="hidden"
                                 whileInView="visible"
@@ -445,7 +445,7 @@ export default function Home() {
 
                                         {/* FAQ 2 */}
                                         <motion.div
-                                            className="accordion-item mb-4 wow fadeInUp"
+                                            className="accordion-item mb-4 wow fadeInUp "
                                             data-wow-delay=".5s"
                                             variants={fadeUp}
                                             initial="hidden"
@@ -471,7 +471,7 @@ export default function Home() {
                                                 className="accordion-collapse collapse"
                                                 data-bs-parent="#accordion"
                                             >
-                                                <div className="accordion-body">
+                                                <div className="accordion-body ">
                                                     It is a long established fact that a reader will be distracted by the
                                                     readable content of a page when looking at its layout. The point of the
                                                     most useful that is so beautiful.
@@ -644,7 +644,9 @@ export default function Home() {
                                     custom={1.0}
                                 >
                                     <span>
+                                        <Link to="/Contact"  onClick={()=>scrollTo(0,0)}>
                                         Subscribe Now <i className="far fa-arrow-right"></i>
+                                        </Link>
                                     </span>
                                 </motion.button>
                             </motion.div>

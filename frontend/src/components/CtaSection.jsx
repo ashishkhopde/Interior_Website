@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import circle from "../assets/img/circle-border.png";
+import { Link } from "react-router-dom";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -67,8 +68,10 @@ export default function CtaSection() {
               viewport={{ once: true }}
               custom={0.7}
             >
+              <Link to="/contact" onClick={()=>scrollTo(0,0)}>
               Get In Touch
               <i className="fas fa-long-arrow-right"></i>
+              </Link>
             </motion.a>
           </div>
         </div>
