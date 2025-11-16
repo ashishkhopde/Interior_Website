@@ -42,3 +42,31 @@ export const getBlogById = async (req, res) => {
         res.status(500).json({ message: "Server Error" });
     }
 }
+
+const updateBlog = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { title, description, image, author, tags } = req.body;
+        const updatedBlog = await BlogModel.findByIdAndUpdate(id, { title, description, image, author, tags }, { new: true });
+        res.status(200).json({
+            message: "Blog updated successfully",
+            blog: updatedBlog
+        });
+    } catch(err) {
+        console.log("Error in updating blog:", err);
+        res.status(500).json({  message: "Server Error" });
+    }           
+}
+
+export const deleteBlog = async (req, res) => {
+    try {
+        const { id } = req.params;
+        await BlogModel.findByIdAndDelete(id);
+        res.status(200).json({
+            message: "Blog deleted successfully"
+        });
+    } catch(err) {
+        console.log("Error in deleting blog:", err);
+        res.status(500).json({ message: "Server Error" });
+    }   
+}
