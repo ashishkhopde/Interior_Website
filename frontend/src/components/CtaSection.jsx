@@ -58,7 +58,7 @@ export default function CtaSection() {
             </div>
 
             <motion.a
-              href="/about"
+              href="/contact"
               className="theme-btn bg-white padding-style wow fadeInUp"
               data-wow-delay=".7s"
               variants={fadeUp}

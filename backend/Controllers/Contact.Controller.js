@@ -1,4 +1,4 @@
-import ContectModel from "../Models/Contect.Model.js";
+import ContectModel from "../Models/Contact.Model.js";
 
 export const getContacts = async (req, res) => {
   try {
@@ -17,8 +17,8 @@ export const createContact = async (req, res) => {
     const { name, email, phone, subject, message } = req.body;
     const newContact = await ContectModel.create({ name, email, phone, subject, message });
 
-    res.status(201).json({ 
-        message: "Contact message received", 
+    res.status(200).json({ 
+        message: "Contact message sended successfully", 
         contact: newContact 
     });
   } catch (error) {
