@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 
 import CtaSection from '../components/CtaSection'
 import BreadcrumbContact from '../components/BreadcrumbSection'
+import ContactForm from '../components/ContactForm';
 
 const fadeUp = {
     hidden: { opacity: 0, y: 40 },
@@ -197,133 +198,7 @@ export default function Contact() {
             </motion.section>
 
             {/* Contact Section Start */}
-            <motion.section
-                className="w-full bg-grey py-16 px-4"
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-            >
-                <div className="max-w-7xl mx-auto">
-                    {/* GRID FIXED → 2 Columns always on large screens */}
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 bg-white rounded-xl shadow-lg">
-                        {/* LEFT SIDE FORM */}
-                        <motion.div
-                            className="p-8 sm:p-12 flex flex-col justify-start"
-                            variants={fadeUp}
-                            custom={0.2}
-                            initial="hidden"
-                            whileInView="visible"
-                            viewport={{ once: true }}
-                        >
-                            <motion.h6
-                                className="text-gray-500 font-semibold"
-                                variants={fadeUp}
-                                custom={0.3}
-                                initial="hidden"
-                                whileInView="visible"
-                                viewport={{ once: true }}
-                            >
-                                Contact Us
-                            </motion.h6>
-
-                            <motion.h2
-                                className="text-4xl font-bold mt-2 mb-6"
-                                variants={fadeUp}
-                                custom={0.4}
-                                initial="hidden"
-                                whileInView="visible"
-                                viewport={{ once: true }}
-                            >
-                                Get In Touch
-                            </motion.h2>
-
-                            <motion.form
-                                className="space-y-5"
-                                variants={fadeUp}
-                                custom={0.5}
-                                initial="hidden"
-                                whileInView="visible"
-                                viewport={{ once: true }}
-                            >
-                                {/* Row 1 */}
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <motion.input
-                                        className="border border-gray-300 rounded-md px-4 py-3"
-                                        placeholder="Your Name"
-                                        variants={fadeUp}
-                                        custom={0.6}
-                                    />
-                                    <motion.input
-                                        className="border border-gray-300 rounded-md px-4 py-3"
-                                        placeholder="Your Email"
-                                        variants={fadeUp}
-                                        custom={0.7}
-                                    />
-                                </div>
-
-                                {/* Row 2 */}
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <motion.input
-                                        className="border border-gray-300 rounded-md px-4 py-3"
-                                        placeholder="Phone Number"
-                                        variants={fadeUp}
-                                        custom={0.8}
-                                    />
-                                    <motion.input
-                                        className="border border-gray-300 rounded-md px-4 py-3"
-                                        placeholder="Subject"
-                                        variants={fadeUp}
-                                        custom={0.9}
-                                    />
-                                </div>
-
-                                {/* Message */}
-                                <motion.textarea
-                                    className="border border-gray-300 rounded-md px-4 py-3 h-32 resize-none"
-                                    placeholder="Message here.."
-                                    variants={fadeUp}
-                                    custom={1.0}
-                                />
-
-                                {/* THE BUTTON */}
-                                <motion.div
-                                    className="pt-4"
-                                    variants={fadeUp}
-                                    custom={1.1}
-                                    initial="hidden"
-                                    whileInView="visible"
-                                    viewport={{ once: true }}
-                                >
-                                    <a
-                                        className="theme-btn bg-grey padding-style wow fadeInUp"
-                                        data-wow-delay=".7s"
-                                    >
-                                        Submit Now
-                                        <i className="fas fa-long-arrow-right"></i>
-                                    </a>
-                                </motion.div>
-                            </motion.form>
-                        </motion.div>
-
-                        {/* RIGHT SIDE IMAGE */}
-                        <motion.div
-                            className="hidden lg:block h-full"
-                            variants={fadeUp}
-                            custom={0.3}
-                            initial="hidden"
-                            whileInView="visible"
-                            viewport={{ once: true }}
-                        >
-                            <img
-                                src="https://modinatheme.com/oraxis/wp-content/uploads/2024/11/contact-1.jpg"
-                                className="w-full h-full object-cover"
-                                alt="Contact"
-                            />
-                        </motion.div>
-                    </div>
-                </div>
-            </motion.section>
+            <ContactForm />
 
 
             {/* Cta Section Start */}
