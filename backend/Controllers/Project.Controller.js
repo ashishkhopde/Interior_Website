@@ -2,10 +2,10 @@ import ProjectModel from "../Models/Project.Model.js";
 
 export const getAllProjects = async (req, res) => {
     try {
-        const posts = await ProjectModel.find({}).sort({ createdAt: -1 });
+        const project = await ProjectModel.find({}).sort({ createdAt: -1 });
         res.status(200).json({
             message: "Posts fetched successfully",
-            posts
+            project
         });
     }catch(err){
         console.log("Error in getting posts:", err);
@@ -17,11 +17,11 @@ export const createProjects = async (req, res) => {
     try {
 
         const { clint, year, author, image, description, pojectTitle } = req.body;
-        const newPost = await ProjectModel.create({clint, year, author, image, description, pojectTitle});
+        const newProject = await ProjectModel.create({clint, year, author, image, description, pojectTitle});
 
         res.status(201).json({
             message: "Post created successfully",
-            post: newPost
+            project: newProject
         });
 
     } catch(err) {

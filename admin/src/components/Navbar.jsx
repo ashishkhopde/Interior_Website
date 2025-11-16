@@ -14,9 +14,9 @@ export default function AdminNavbar() {
   const navLinks = [
     { name: "Dashboard", href: "/" },
     { name: "Messages", href: "/message" },
-    { name: "Projects", href: "/admin/projects" },
-    { name: "Blogs", href: "/admin/blogs" },
-    { name: "Services", href: "/admin/services" },
+    { name: "Projects", href: "/projects" },
+    { name: "Blogs", href: "/blog" },
+    { name: "Services", href: "/services" },
   ];
 
   const handleLogout = () => {
