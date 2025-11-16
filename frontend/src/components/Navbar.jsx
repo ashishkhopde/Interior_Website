@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import HeaderLogo from "../assets/img/interior-logo-shorted.jpeg";
-import HomeMenu1 from "../assets/img/header/home-1.jpg";
-import HomeMenu2 from "../assets/img/header/home-2.jpg";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

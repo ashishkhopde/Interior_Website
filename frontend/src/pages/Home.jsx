@@ -16,6 +16,7 @@ import TestimonialSection from '../components/TestimonialSection';
 import TeamSection from '../components/TeamSection';
 import NewsSection from '../components/NewsSection';
 import HomeHeroSection from '../components/HomeHeroSection';
+import { Link } from 'react-router-dom';
 
 const fadeUp = {
     hidden: { opacity: 0, y: 40 },
@@ -98,9 +99,9 @@ export default function Home() {
                                                         <a href="service-details.html">Architecture Plus</a>
                                                     </h3>
                                                     <p>This category focuses on the design and man</p>
-                                                    <a href="service-details.html" className="link-btn">
+                                                    <Link to="/service-details" className="link-btn">
                                                         Read More <i className="fas fa-long-arrow-right"></i>
-                                                    </a>
+                                                    </Link>
                                                 </div>
                                             </div>
                                         </motion.div>
@@ -124,9 +125,9 @@ export default function Home() {
                                                         <a href="service-details.html">Urban Oasis</a>
                                                     </h3>
                                                     <p>This category focuses on the design and man</p>
-                                                    <a href="service-details.html" className="link-btn">
+                                                    <Link to="/service-details" className="link-btn">
                                                         Read More <i className="fas fa-long-arrow-right"></i>
-                                                    </a>
+                                                    </Link>
                                                 </div>
                                             </div>
                                         </motion.div>
@@ -150,9 +151,9 @@ export default function Home() {
                                                         <a href="service-details.html">Blueprint Builders</a>
                                                     </h3>
                                                     <p>This category focuses on the design and man</p>
-                                                    <a href="service-details.html" className="link-btn">
+                                                    <Link to="/service-details" className="link-btn">
                                                         Read More <i className="fas fa-long-arrow-right"></i>
-                                                    </a>
+                                                    </Link>
                                                 </div>
                                             </div>
                                         </motion.div>
