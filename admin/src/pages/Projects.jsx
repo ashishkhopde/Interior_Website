@@ -14,7 +14,7 @@ export default function Projects() {
   const [status, setStatus] = useState("");
   const [editingProject, setEditingProject] = useState(null);
 
-  const fetchProjects = async () => {
+  async function fetchProjects () {
       try {
         const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/project`);
         console.log(res.data)
@@ -26,8 +26,6 @@ export default function Projects() {
 
   // Fetch existing projects
   useEffect(() => {
-    
-
     fetchProjects();
   }, []);
 
