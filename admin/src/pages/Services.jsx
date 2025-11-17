@@ -6,8 +6,8 @@ export default function Services() {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
-    image: "",
   });
+  const [imageFile, setImageFile] = useState(null); // ✅ store selected file
   const [status, setStatus] = useState("");
   const [editingServiceId, setEditingServiceId] = useState(null);
 
@@ -24,9 +24,14 @@ export default function Services() {
     fetchServices();
   }, []);
 
-  // Handle input change
+  // Handle text inputs
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  // Handle file input
+  const handleFileChange = (e) => {
+    setImageFile(e.target.files[0]);
   };
 
   // Add or Update Service
@@ -35,32 +40,41 @@ export default function Services() {
     setStatus(editingServiceId ? "Updating service..." : "Saving service...");
 
     try {
+      const data = new FormData();
+      Object.keys(formData).forEach((key) => data.append(key, formData[key]));
+      if (imageFile) data.append("serviceImage", imageFile); // ✅ matches multer field
+
+      let res;
       if (editingServiceId) {
-        const res = await axios.put(
+        res = await axios.put(
           `${import.meta.env.VITE_BASE_URL}/service/${editingServiceId}`,
-          formData
+          data,
+          { headers: { "Content-Type": "multipart/form-data" } }
         );
-        if (res.status === 200) {
-          setStatus("✅ Service updated successfully!");
-          setServices((prev) =>
-            prev.map((s) =>
-              s._id === editingServiceId ? res.data.service : s
-            )
-          );
-          setEditingServiceId(null);
-        }
       } else {
-        const res = await axios.post(
+        res = await axios.post(
           `${import.meta.env.VITE_BASE_URL}/service`,
-          formData
+          data,
+          { headers: { "Content-Type": "multipart/form-data" } }
         );
-        if (res.status === 201) {
-          setStatus("✅ Service added successfully!");
-          setServices((prev) => [...prev, res.data.service]);
-        }
       }
 
-      setFormData({ title: "", description: "", image: "" });
+      if (res.status === 200 || res.status === 201) {
+        setStatus(
+          editingServiceId
+            ? "✅ Service updated successfully!"
+            : "✅ Service added successfully!"
+        );
+        setEditingServiceId(null);
+
+        // Refresh data
+        const refreshed = await axios.get(`${import.meta.env.VITE_BASE_URL}/service`);
+        setServices(refreshed.data.services);
+      }
+
+      // Reset form
+      setFormData({ title: "", description: "" });
+      setImageFile(null);
       setTimeout(() => setStatus(""), 3000);
     } catch (err) {
       console.error("Error saving service:", err);
@@ -73,9 +87,9 @@ export default function Services() {
     setFormData({
       title: service.title,
       description: service.description,
-      image: service.image,
     });
     setEditingServiceId(service._id);
+    setImageFile(null);
     setStatus("✏️ Editing mode enabled");
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -97,7 +111,8 @@ export default function Services() {
   // Cancel editing
   const handleCancel = () => {
     setEditingServiceId(null);
-    setFormData({ title: "", description: "", image: "" });
+    setFormData({ title: "", description: "" });
+    setImageFile(null);
     setStatus("");
   };
 
@@ -115,6 +130,7 @@ export default function Services() {
           <form
             onSubmit={handleSubmit}
             className="grid grid-cols-1 md:grid-cols-2 gap-6"
+            encType="multipart/form-data"
           >
             <input
               name="title"
@@ -124,14 +140,17 @@ export default function Services() {
               className="border border-gray-300 rounded-md px-4 py-3 text-black w-full"
               required
             />
+
+            {/* ✅ File input for image */}
             <input
-              name="image"
-              value={formData.image}
-              onChange={handleChange}
-              placeholder="Image URL"
+              type="file"
+              name="serviceImage"
+              accept="image/*"
+              onChange={handleFileChange}
               className="border border-gray-300 rounded-md px-4 py-3 text-black w-full"
-              required
+              required={!editingServiceId}
             />
+
             <textarea
               name="description"
               value={formData.description}
@@ -140,6 +159,7 @@ export default function Services() {
               className="border border-gray-300 rounded-md px-4 py-3 text-black h-32 resize-none w-full md:col-span-2"
               required
             />
+
             <div className="flex gap-4 md:col-span-2">
               <button
                 type="submit"
@@ -164,7 +184,7 @@ export default function Services() {
           )}
         </div>
 
-        {/* Service Cards (same as Blog & Project layout) */}
+        {/* Service Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service) => (
             <div

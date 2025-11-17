@@ -1,4 +1,6 @@
 import ServiceModel from "../Models/Service.Model.js";
+import { uploadOnCloudinary } from "../Utils/cloudnary.js";
+
 
 export const getServices = async (req, res) => {
     try {
@@ -33,9 +35,9 @@ export const createService = async (req, res) => {
     try {
         const { title, description } = req.body;
 
-        const servicesImages = req.files?.servicesImages[0]?.path;
+        const serviceImage = req.files?.serviceImage[0]?.path;
 
-        const image = await uploadOnCloudinary(servicesImages);
+        const image = await uploadOnCloudinary(serviceImage);
 
         // console.log("Uploaded image info:", image);
 
@@ -47,7 +49,7 @@ export const createService = async (req, res) => {
         }
 
 
-        const newService = await ServiceModel.create({ title, description, image });
+        const newService = await ServiceModel.create({ title, description, image: image.url });
         res.status(201).json({
             message: "Service created successfully",
             service: newService

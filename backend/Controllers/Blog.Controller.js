@@ -1,4 +1,5 @@
 import BlogModel from "../Models/Blog.Model.js";
+import { uploadOnCloudinary } from "../Utils/cloudnary.js";
 
 export const getAllBlogs = async (req, res) => {
     try {
@@ -17,9 +18,9 @@ export const createBlog = async (req, res) => {
     try {
         const { title, description, author } = req.body;
 
-        const blogImages = req.files?.blogImages[0]?.path;
+        const blogImage = req.files?.blogImage[0]?.path;
 
-        const image = await uploadOnCloudinary(blogImages);
+        const image = await uploadOnCloudinary(blogImage);
 
         // console.log("Uploaded image info:", image);
 
@@ -30,7 +31,7 @@ export const createBlog = async (req, res) => {
             });
         }
 
-        const newBlog = await BlogModel.create({ title, description, image, author });
+        const newBlog = await BlogModel.create({ title, description, image: image.url, author });
         res.status(201).json({
             message: "Blog created successfully",
             blog: newBlog

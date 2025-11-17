@@ -6,9 +6,9 @@ export default function Blog() {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
-    image: "",
     author: "",
   });
+  const [imageFile, setImageFile] = useState(null);
   const [status, setStatus] = useState("");
   const [editingBlogId, setEditingBlogId] = useState(null);
 
@@ -25,9 +25,14 @@ export default function Blog() {
     fetchBlogs();
   }, []);
 
-  // Input change handler
+  // Handle text input
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  // Handle file input
+  const handleFileChange = (e) => {
+    setImageFile(e.target.files[0]);
   };
 
   // Add or Update Blog
@@ -36,36 +41,43 @@ export default function Blog() {
     setStatus(editingBlogId ? "Updating..." : "Saving...");
 
     try {
-      if (editingBlogId) {
-        const res = await axios.put(
-          `${import.meta.env.VITE_BASE_URL}/blog/${editingBlogId}`,
-          formData
-        );
+      const data = new FormData();
+      Object.keys(formData).forEach((key) => data.append(key, formData[key]));
+      if (imageFile) data.append("blogImage", imageFile); // ✅ must match backend field
 
-        if (res.status === 200) {
-          setStatus("Blog updated successfully!");
-          setBlogs((prev) =>
-            prev.map((b) => (b._id === editingBlogId ? res.data.blog : b))
-          );
-          setEditingBlogId(null);
-        }
-      } else {
-        const res = await axios.post(
-          `${import.meta.env.VITE_BASE_URL}/blog`,
-          formData
+      let res;
+      if (editingBlogId) {
+        res = await axios.put(
+          `${import.meta.env.VITE_BASE_URL}/blog/${editingBlogId}`,
+          data,
+          { headers: { "Content-Type": "multipart/form-data" } }
         );
-        if (res.status === 201) {
-          setStatus("Blog added successfully!");
-          setBlogs((prev) => [...prev, res.data.blog]);
-        }
+      } else {
+        res = await axios.post(`${import.meta.env.VITE_BASE_URL}/blog`, data, {
+          headers: { "Content-Type": "multipart/form-data" },
+        });
       }
 
-      // Reset form
-      setFormData({ title: "", description: "", image: "", author: "" });
+      if (res.status === 200 || res.status === 201) {
+        setStatus(
+          editingBlogId
+            ? "✅ Blog updated successfully!"
+            : "✅ Blog added successfully!"
+        );
+        setEditingBlogId(null);
+
+        // Refresh blogs
+        const refreshed = await axios.get(`${import.meta.env.VITE_BASE_URL}/blog`);
+        setBlogs(refreshed.data.blogs);
+      }
+
+      // Reset
+      setFormData({ title: "", description: "", author: "" });
+      setImageFile(null);
       setTimeout(() => setStatus(""), 3000);
     } catch (err) {
       console.error("Error saving blog:", err);
-      setStatus("Error saving blog.");
+      setStatus("❌ Error saving blog.");
     }
   };
 
@@ -74,12 +86,12 @@ export default function Blog() {
     setFormData({
       title: blog.title,
       description: blog.description,
-      image: blog.image,
       author: blog.author,
     });
     setEditingBlogId(blog._id);
+    setImageFile(null);
     window.scrollTo({ top: 0, behavior: "smooth" });
-    setStatus("Editing mode enabled");
+    setStatus("✏️ Editing mode enabled");
   };
 
   // Delete blog
@@ -88,18 +100,18 @@ export default function Blog() {
     try {
       await axios.delete(`${import.meta.env.VITE_BASE_URL}/blog/${id}`);
       setBlogs((prev) => prev.filter((b) => b._id !== id));
-      setStatus("Blog deleted successfully!");
+      setStatus("🗑️ Blog deleted successfully!");
       setTimeout(() => setStatus(""), 3000);
     } catch (err) {
       console.error("Error deleting blog:", err);
-      setStatus("Error deleting blog.");
+      setStatus("❌ Error deleting blog.");
     }
   };
 
-  // Cancel edit
   const handleCancel = () => {
     setEditingBlogId(null);
-    setFormData({ title: "", description: "", image: "", author: "" });
+    setFormData({ title: "", description: "", author: "" });
+    setImageFile(null);
     setStatus("");
   };
 
@@ -108,7 +120,7 @@ export default function Blog() {
       <div className="max-w-7xl mx-auto">
         <h1 className="text-3xl font-bold text-gray-800 mb-6">Blogs</h1>
 
-        {/* Add/Edit Blog Form */}
+        {/* Add/Edit Form */}
         <div className="bg-white p-6 rounded-lg shadow-md mb-10">
           <h2 className="text-xl font-semibold text-gray-800 mb-4">
             {editingBlogId ? "Edit Blog" : "Add New Blog"}
@@ -117,6 +129,7 @@ export default function Blog() {
           <form
             onSubmit={handleSubmit}
             className="grid grid-cols-1 md:grid-cols-2 gap-6"
+            encType="multipart/form-data"
           >
             <input
               name="title"
@@ -134,14 +147,17 @@ export default function Blog() {
               className="border border-gray-300 rounded-md px-4 py-3 text-black w-full"
               required
             />
+
+            {/* ✅ File Input */}
             <input
-              name="image"
-              value={formData.image}
-              onChange={handleChange}
-              placeholder="Image URL"
+              type="file"
+              name="blogImage"
+              accept="image/*"
+              onChange={handleFileChange}
               className="border border-gray-300 rounded-md px-4 py-3 text-black w-full md:col-span-2"
-              required
+              required={!editingBlogId}
             />
+
             <textarea
               name="description"
               value={formData.description}
@@ -150,6 +166,7 @@ export default function Blog() {
               className="border border-gray-300 rounded-md px-4 py-3 text-black h-32 resize-none w-full md:col-span-2"
               required
             />
+
             <div className="flex gap-4 md:col-span-2">
               <button
                 type="submit"
@@ -172,7 +189,7 @@ export default function Blog() {
           {status && <p className="text-sm text-gray-500 mt-3">{status}</p>}
         </div>
 
-        {/* Blog Cards (same style as Project cards) */}
+        {/* Blog Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {blogs.map((blog) => (
             <div
@@ -198,7 +215,6 @@ export default function Blog() {
                   {new Date(blog.createdAt).toLocaleDateString()}
                 </p>
 
-                {/* Edit / Delete Buttons (same position as Projects) */}
                 <div className="flex justify-between">
                   <button
                     onClick={() => handleEdit(blog)}

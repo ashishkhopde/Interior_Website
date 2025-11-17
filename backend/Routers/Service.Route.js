@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { getServices, getServiceById, createService, updateService, deleteService, getTotalServices } from "../Controllers/Service.Controller.js"
+import { upload } from "../Middleware/multer.middleware.js";
 
 const router = Router();
 
@@ -8,7 +9,7 @@ router.get("/total", getTotalServices);
 router.get("/:id", getServiceById);
 router.post("/", 
     upload.fields([{
-        name: "servicesImages", maxCount: 1
+        name: "serviceImage", maxCount: 1
     }]),
     createService
 );

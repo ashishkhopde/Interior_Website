@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { getAllBlogs, getBlogById, createBlog, updateBlog, deleteBlog, getTotalBlogs } from "../Controllers/Blog.Controller.js";
+import { upload } from "../Middleware/multer.middleware.js";
 
 const router = Router();
 
@@ -8,7 +9,7 @@ router.get("/total", getTotalBlogs)
 router.get("/:id", getBlogById);
 router.post("/", 
     upload.fields([{
-        name: "blogImages", maxCount: 1
+        name: "blogImage", maxCount: 1
     }]),
     createBlog
 );
