@@ -1,7 +1,7 @@
 import { Schema, model } from "mongoose";
 
 const projectSchema = new Schema({
-    clint: {
+    client: {
         type: String,
         required: true
     },
@@ -21,7 +21,7 @@ const projectSchema = new Schema({
         type: String,
         required: true
     },
-    pojectTitle: {
+    projectTitle: {
         type: String,
         required: true
     }

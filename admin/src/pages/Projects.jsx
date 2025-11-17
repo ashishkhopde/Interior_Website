@@ -44,7 +44,7 @@ export default function Projects() {
       if (editingProject) {
         // Update existing project
         const res = await axios.put(
-          `${import.meta.env.VITE_BASE_URL}/projects/${editingProject._id}`,
+          `${import.meta.env.VITE_BASE_URL}/project/${editingProject._id}`,
           formData
         );
         if (res.status === 200) {
@@ -55,12 +55,12 @@ export default function Projects() {
       } else {
         // Add new project
         const res = await axios.post(
-          `${import.meta.env.VITE_BASE_URL}/projects`,
+          `${import.meta.env.VITE_BASE_URL}/project`,
           formData
         );
         if (res.status === 200 || res.status === 201) {
           setStatus("Project added successfully!");
-          setProjects((prev) => [...prev, res.data]);
+          setProjects((prev) => [...prev, res.data.project]);
         }
       }
 
@@ -98,7 +98,7 @@ export default function Projects() {
     if (!confirm("Are you sure you want to delete this project?")) return;
 
     try {
-      const res = await axios.delete(`${import.meta.env.VITE_BASE_URL}/projects/${id}`);
+      const res = await axios.delete(`${import.meta.env.VITE_BASE_URL}/project/${id}`);
       if (res.status === 200) {
         setProjects((prev) => prev.filter((proj) => proj._id !== id));
         setStatus("Project deleted successfully!");

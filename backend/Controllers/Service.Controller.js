@@ -15,8 +15,8 @@ export const getServices = async (req, res) => {
 
 export const createService = async (req, res) => {
     try {
-        const { title, description, icon } = req.body;
-        const newService = await ServiceModel.create({ title, description, icon });
+        const { title, description, image } = req.body;
+        const newService = await ServiceModel.create({ title, description, image });
         res.status(201).json({
             message: "Service created successfully",
             service: newService
@@ -46,8 +46,8 @@ export const getServiceById = async (req, res) => {
 export const updateService = async (req, res) => {
     try {
         const { id } = req.params;
-        const { title, description, icon } = req.body;
-        const updatedService = await ServiceModel.findByIdAndUpdate(id, { title, description, icon }, { new: true });
+        const { title, description, image } = req.body;
+        const updatedService = await ServiceModel.findByIdAndUpdate(id, { title, description, image });
         res.status(200).json({
             message: "Service updated successfully",
             service: updatedService

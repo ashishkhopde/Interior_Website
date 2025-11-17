@@ -16,8 +16,8 @@ export const getAllProjects = async (req, res) => {
 export const createProjects = async (req, res) => {
     try {
 
-        const { clint, year, author, image, description, pojectTitle } = req.body;
-        const newProject = await ProjectModel.create({clint, year, author, image, description, pojectTitle});
+        const { client, year, author, image, description, projectTitle } = req.body;
+        const newProject = await ProjectModel.create({client, year, author, image, description, projectTitle});
 
         res.status(201).json({
             message: "Post created successfully",
@@ -64,10 +64,10 @@ export const deleteProjectById = async (req, res) => {
 export const updateProjectById = async (req, res) => {
     try {
         const {id} = req.params;
-        const { clint, year, author, image, description, pojectTitle } = req.body;          
+        const { client, year, author, image, description, pojectTitle } = req.body;          
         const updatedProject = await ProjectModel.findByIdAndUpdate(
             id,
-            { clint, year, author, image, description, pojectTitle }
+            { client, year, author, image, description, pojectTitle }
         );  
         res.status(200).json({
             message: "Post updated successfully",

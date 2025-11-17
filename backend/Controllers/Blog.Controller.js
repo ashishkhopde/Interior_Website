@@ -15,8 +15,8 @@ export const getAllBlogs = async (req, res) => {
 
 export const createBlog = async (req, res) => {
     try {
-        const { title, description, image, author, tags } = req.body;
-        const newBlog = await BlogModel.create({ title, description, image, author, tags });
+        const { title, description, image, author } = req.body;
+        const newBlog = await BlogModel.create({ title, description, image, author });
         res.status(201).json({
             message: "Blog created successfully",
             blog: newBlog
@@ -46,8 +46,8 @@ export const getBlogById = async (req, res) => {
 export const updateBlog = async (req, res) => {
     try {
         const { id } = req.params;
-        const { title, description, image, author, tags } = req.body;
-        const updatedBlog = await BlogModel.findByIdAndUpdate(id, { title, description, image, author, tags }, { new: true });
+        const { title, description, image, author } = req.body;
+        const updatedBlog = await BlogModel.findByIdAndUpdate(id, { title, description, image, author });
         res.status(200).json({
             message: "Blog updated successfully",
             blog: updatedBlog
