@@ -12,7 +12,7 @@ export default function Blog() {
   const [status, setStatus] = useState("");
   const [editingBlogId, setEditingBlogId] = useState(null);
 
-  // Fetch existing blogs
+  // Fetch blogs
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
@@ -25,19 +25,18 @@ export default function Blog() {
     fetchBlogs();
   }, []);
 
-  // Handle input change
+  // Input change handler
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  // Handle submit (Add or Edit)
+  // Add or Update Blog
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setStatus("Saving...");
+    setStatus(editingBlogId ? "Updating..." : "Saving...");
 
     try {
       if (editingBlogId) {
-        // Update existing blog
         const res = await axios.put(
           `${import.meta.env.VITE_BASE_URL}/blog/${editingBlogId}`,
           formData
@@ -51,7 +50,6 @@ export default function Blog() {
           setEditingBlogId(null);
         }
       } else {
-        // Create new blog
         const res = await axios.post(
           `${import.meta.env.VITE_BASE_URL}/blog`,
           formData
@@ -64,13 +62,14 @@ export default function Blog() {
 
       // Reset form
       setFormData({ title: "", description: "", image: "", author: "" });
+      setTimeout(() => setStatus(""), 3000);
     } catch (err) {
       console.error("Error saving blog:", err);
       setStatus("Error saving blog.");
     }
   };
 
-  // Handle edit
+  // Edit blog
   const handleEdit = (blog) => {
     setFormData({
       title: blog.title,
@@ -79,21 +78,29 @@ export default function Blog() {
       author: blog.author,
     });
     setEditingBlogId(blog._id);
+    window.scrollTo({ top: 0, behavior: "smooth" });
     setStatus("Editing mode enabled");
   };
 
-  // Handle delete
+  // Delete blog
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this blog?")) return;
-
     try {
       await axios.delete(`${import.meta.env.VITE_BASE_URL}/blog/${id}`);
       setBlogs((prev) => prev.filter((b) => b._id !== id));
       setStatus("Blog deleted successfully!");
+      setTimeout(() => setStatus(""), 3000);
     } catch (err) {
       console.error("Error deleting blog:", err);
       setStatus("Error deleting blog.");
     }
+  };
+
+  // Cancel edit
+  const handleCancel = () => {
+    setEditingBlogId(null);
+    setFormData({ title: "", description: "", image: "", author: "" });
+    setStatus("");
   };
 
   return (
@@ -153,16 +160,7 @@ export default function Blog() {
               {editingBlogId && (
                 <button
                   type="button"
-                  onClick={() => {
-                    setEditingBlogId(null);
-                    setFormData({
-                      title: "",
-                      description: "",
-                      image: "",
-                      author: "",
-                    });
-                    setStatus("");
-                  }}
+                  onClick={handleCancel}
                   className="bg-gray-300 text-gray-800 px-6 py-3 rounded-md hover:bg-gray-400 transition"
                 >
                   Cancel
@@ -174,7 +172,7 @@ export default function Blog() {
           {status && <p className="text-sm text-gray-500 mt-3">{status}</p>}
         </div>
 
-        {/* Blog Cards */}
+        {/* Blog Cards (same style as Project cards) */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {blogs.map((blog) => (
             <div
@@ -187,32 +185,32 @@ export default function Blog() {
                 className="h-48 w-full object-cover"
               />
               <div className="p-5">
-                <h3 className="text-lg font-bold text-gray-900 mb-1">
+                <h3 className="text-lg font-bold text-gray-900">
                   {blog.title}
                 </h3>
                 <p className="text-sm text-gray-500 mb-2">
                   By <span className="font-medium">{blog.author}</span>
                 </p>
-                <p className="text-gray-700 text-sm line-clamp-3 mb-3">
+                <p className="text-gray-700 text-sm line-clamp-3 mb-4">
                   {blog.description}
                 </p>
                 <p className="text-xs text-gray-400 mb-4">
                   {new Date(blog.createdAt).toLocaleDateString()}
                 </p>
 
-                {/* Action Buttons */}
+                {/* Edit / Delete Buttons (same position as Projects) */}
                 <div className="flex justify-between">
                   <button
                     onClick={() => handleEdit(blog)}
-                    className="text-blue-600 hover:underline text-sm"
+                    className="text-blue-600 hover:text-blue-800 font-medium"
                   >
-                    Edit
+                    ✏️ Edit
                   </button>
                   <button
                     onClick={() => handleDelete(blog._id)}
-                    className="text-red-600 hover:underline text-sm"
+                    className="text-red-600 hover:text-red-800 font-medium"
                   >
-                    Delete
+                    🗑️ Delete
                   </button>
                 </div>
               </div>

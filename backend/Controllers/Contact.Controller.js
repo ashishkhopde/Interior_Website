@@ -12,6 +12,22 @@ export const getContacts = async (req, res) => {
   }
 };
 
+export const getTotalMessages = async (req, res) => {
+  try {
+    const totalMessages = await ContectModel.countDocuments();
+    res.status(200).json({
+      message: "Total messages fetched successfully",
+      totalMessages,
+    });
+  } catch (error) {
+    console.error("Error fetching total messages:", error);
+    res.status(500).json({
+      message: "Server Error",
+      error: error.message,
+    });
+  }
+};
+
 export const createContact = async (req, res) => {
   try {
     const { name, email, phone, subject, message } = req.body;

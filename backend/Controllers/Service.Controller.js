@@ -7,11 +7,27 @@ export const getServices = async (req, res) => {
             message: "Services fetched successfully",
             services
         });
-    } catch(err){
+    } catch (err) {
         console.log("Error in getting services:", err);
         res.status(500).json({ message: "Server Error" });
     }
 }
+
+export const getTotalServices = async (req, res) => {
+    try {
+        const totalServices = await ServiceModel.countDocuments();
+        res.status(200).json({
+            message: "Total services fetched successfully",
+            totalServices,
+        });
+    } catch (error) {
+        console.error("Error fetching total services:", error);
+        res.status(500).json({
+            message: "Server Error",
+            error: error.message,
+        });
+    }
+};
 
 export const createService = async (req, res) => {
     try {
@@ -21,7 +37,7 @@ export const createService = async (req, res) => {
             message: "Service created successfully",
             service: newService
         });
-    } catch(err) {
+    } catch (err) {
         console.log("Error in creating service:", err);
         res.status(500).json({
             message: "Service creation error"
@@ -37,7 +53,7 @@ export const getServiceById = async (req, res) => {
             message: "Service fetched successfully",
             service
         });
-    } catch(err){
+    } catch (err) {
         console.log("Error in getting service:", err);
         res.status(500).json({ message: "Server Error" });
     }
@@ -52,10 +68,10 @@ export const updateService = async (req, res) => {
             message: "Service updated successfully",
             service: updatedService
         });
-    } catch(err) {
+    } catch (err) {
         console.log("Error in updating service:", err);
-        res.status(500).json({  message: "Server Error" });
-    }   
+        res.status(500).json({ message: "Server Error" });
+    }
 }
 
 export const deleteService = async (req, res) => {
@@ -65,7 +81,7 @@ export const deleteService = async (req, res) => {
         res.status(200).json({
             message: "Service deleted successfully"
         });
-    } catch(err) {
+    } catch (err) {
         console.log("Error in deleting service:", err);
         res.status(500).json({ message: "Server Error" });
     }

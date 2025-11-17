@@ -7,24 +7,40 @@ export const getAllProjects = async (req, res) => {
             message: "Posts fetched successfully",
             project
         });
-    }catch(err){
+    } catch (err) {
         console.log("Error in getting posts:", err);
         res.status(500).json({ message: "Server Error" });
     }
 }
 
+export const getTotalProjects = async (req, res) => {
+  try {
+    const totalProjects = await ProjectModel.countDocuments();
+    res.status(200).json({
+      message: "Total projects fetched successfully",
+      totalProjects,
+    });
+  } catch (error) {
+    console.error("Error fetching total projects:", error);
+    res.status(500).json({
+      message: "Server Error",
+      error: error.message,
+    });
+  }
+};
+
 export const createProjects = async (req, res) => {
     try {
 
         const { client, year, author, image, description, projectTitle } = req.body;
-        const newProject = await ProjectModel.create({client, year, author, image, description, projectTitle});
+        const newProject = await ProjectModel.create({ client, year, author, image, description, projectTitle });
 
         res.status(201).json({
             message: "Post created successfully",
             project: newProject
         });
 
-    } catch(err) {
+    } catch (err) {
 
         console.log("Error in creating posts:", err)
         res.status(500).json({
@@ -36,13 +52,13 @@ export const createProjects = async (req, res) => {
 
 export const getProjectById = async (req, res) => {
     try {
-        const {id} = req.params;
+        const { id } = req.params;
         const post = await ProjectModel.findById(id);
         res.status(200).json({
             message: "Posts fetched successfully",
             post
         });
-    }catch(err){
+    } catch (err) {
         console.log("Error in getting posts:", err);
         res.status(500).json({ message: "Server Error" });
     }
@@ -50,31 +66,31 @@ export const getProjectById = async (req, res) => {
 
 export const deleteProjectById = async (req, res) => {
     try {
-        const {id} = req.params;
+        const { id } = req.params;
         await ProjectModel.findByIdAndDelete(id);
         res.status(200).json({
             message: "Post deleted successfully"
         });
-    }catch(err){
+    } catch (err) {
         console.log("Error in deleting post:", err);
         res.status(500).json({ message: "Server Error" });
-    } 
+    }
 }
 
 export const updateProjectById = async (req, res) => {
     try {
-        const {id} = req.params;
-        const { client, year, author, image, description, pojectTitle } = req.body;          
+        const { id } = req.params;
+        const { client, year, author, image, description, pojectTitle } = req.body;
         const updatedProject = await ProjectModel.findByIdAndUpdate(
             id,
             { client, year, author, image, description, pojectTitle }
-        );  
+        );
         res.status(200).json({
             message: "Post updated successfully",
             project: updatedProject
         });
-    }catch(err){
+    } catch (err) {
         console.log("Error in updating post:", err);
         res.status(500).json({ message: "Server Error" });
-    }   
+    }
 }

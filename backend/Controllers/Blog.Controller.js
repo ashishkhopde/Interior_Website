@@ -7,7 +7,7 @@ export const getAllBlogs = async (req, res) => {
             message: "Blogs fetched successfully",
             blogs
         });
-    }catch(err){
+    } catch (err) {
         console.log("Error in getting blogs:", err);
         res.status(500).json({ message: "Server Error" });
     }
@@ -21,7 +21,7 @@ export const createBlog = async (req, res) => {
             message: "Blog created successfully",
             blog: newBlog
         });
-    } catch(err) {
+    } catch (err) {
         console.log("Error in creating blog:", err)
         res.status(500).json({
             message: "Blog creation error"
@@ -29,15 +29,31 @@ export const createBlog = async (req, res) => {
     }
 }
 
+export const getTotalBlogs = async (req, res) => {
+    try {
+        const totalBlogs = await BlogModel.countDocuments();
+        res.status(200).json({
+            message: "Total blogs fetched successfully",
+            totalBlogs,
+        });
+    } catch (error) {
+        console.error("Error fetching total blogs:", error);
+        res.status(500).json({
+            message: "Server Error",
+            error: error.message,
+        });
+    }
+};
+
 export const getBlogById = async (req, res) => {
     try {
-        const {id} = req.params;
+        const { id } = req.params;
         const blog = await BlogModel.findById(id);
         res.status(200).json({
             message: "Blog fetched successfully",
             blog
         });
-    }catch(err){
+    } catch (err) {
         console.log("Error in getting blog:", err);
         res.status(500).json({ message: "Server Error" });
     }
@@ -52,10 +68,10 @@ export const updateBlog = async (req, res) => {
             message: "Blog updated successfully",
             blog: updatedBlog
         });
-    } catch(err) {
+    } catch (err) {
         console.log("Error in updating blog:", err);
-        res.status(500).json({  message: "Server Error" });
-    }           
+        res.status(500).json({ message: "Server Error" });
+    }
 }
 
 export const deleteBlog = async (req, res) => {
@@ -65,8 +81,8 @@ export const deleteBlog = async (req, res) => {
         res.status(200).json({
             message: "Blog deleted successfully"
         });
-    } catch(err) {
+    } catch (err) {
         console.log("Error in deleting blog:", err);
         res.status(500).json({ message: "Server Error" });
-    }   
+    }
 }

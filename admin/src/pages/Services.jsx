@@ -29,21 +29,19 @@ export default function Services() {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  // Handle form submit (Add or Update)
+  // Add or Update Service
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setStatus("Saving...");
+    setStatus(editingServiceId ? "Updating service..." : "Saving service...");
 
     try {
       if (editingServiceId) {
-        // Update existing service
         const res = await axios.put(
           `${import.meta.env.VITE_BASE_URL}/service/${editingServiceId}`,
           formData
         );
-
         if (res.status === 200) {
-          setStatus("Service updated successfully!");
+          setStatus("✅ Service updated successfully!");
           setServices((prev) =>
             prev.map((s) =>
               s._id === editingServiceId ? res.data.service : s
@@ -52,21 +50,21 @@ export default function Services() {
           setEditingServiceId(null);
         }
       } else {
-        // Create new service
         const res = await axios.post(
           `${import.meta.env.VITE_BASE_URL}/service`,
           formData
         );
         if (res.status === 201) {
-          setStatus("Service added successfully!");
+          setStatus("✅ Service added successfully!");
           setServices((prev) => [...prev, res.data.service]);
         }
       }
 
       setFormData({ title: "", description: "", image: "" });
+      setTimeout(() => setStatus(""), 3000);
     } catch (err) {
       console.error("Error saving service:", err);
-      setStatus("Error saving service.");
+      setStatus("❌ Error saving service.");
     }
   };
 
@@ -78,21 +76,29 @@ export default function Services() {
       image: service.image,
     });
     setEditingServiceId(service._id);
-    setStatus("Editing mode enabled");
+    setStatus("✏️ Editing mode enabled");
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   // Handle delete
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this service?")) return;
-
     try {
       await axios.delete(`${import.meta.env.VITE_BASE_URL}/service/${id}`);
       setServices((prev) => prev.filter((s) => s._id !== id));
-      setStatus("Service deleted successfully!");
+      setStatus("🗑️ Service deleted successfully!");
+      setTimeout(() => setStatus(""), 3000);
     } catch (err) {
       console.error("Error deleting service:", err);
-      setStatus("Error deleting service.");
+      setStatus("❌ Error deleting service.");
     }
+  };
+
+  // Cancel editing
+  const handleCancel = () => {
+    setEditingServiceId(null);
+    setFormData({ title: "", description: "", image: "" });
+    setStatus("");
   };
 
   return (
@@ -144,11 +150,7 @@ export default function Services() {
               {editingServiceId && (
                 <button
                   type="button"
-                  onClick={() => {
-                    setEditingServiceId(null);
-                    setFormData({ title: "", description: "", image: "" });
-                    setStatus("");
-                  }}
+                  onClick={handleCancel}
                   className="bg-gray-300 text-gray-800 px-6 py-3 rounded-md hover:bg-gray-400 transition"
                 >
                   Cancel
@@ -157,10 +159,12 @@ export default function Services() {
             </div>
           </form>
 
-          {status && <p className="text-sm text-gray-500 mt-3">{status}</p>}
+          {status && (
+            <p className="text-sm text-gray-500 mt-3 border-t pt-2">{status}</p>
+          )}
         </div>
 
-        {/* Service Cards */}
+        {/* Service Cards (same as Blog & Project layout) */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service) => (
             <div
@@ -173,29 +177,28 @@ export default function Services() {
                 className="h-48 w-full object-cover"
               />
               <div className="p-5">
-                <h3 className="text-lg font-bold text-gray-900 mb-2">
+                <h3 className="text-lg font-bold text-gray-900 mb-1">
                   {service.title}
                 </h3>
-                <p className="text-gray-700 text-sm line-clamp-3">
+                <p className="text-gray-700 text-sm line-clamp-3 mb-3">
                   {service.description}
                 </p>
-                <p className="text-xs text-gray-400 mt-3 mb-4">
+                <p className="text-xs text-gray-400 mb-4">
                   {new Date(service.createdAt).toLocaleDateString()}
                 </p>
 
-                {/* Action Buttons */}
                 <div className="flex justify-between">
                   <button
                     onClick={() => handleEdit(service)}
-                    className="text-blue-600 hover:underline text-sm"
+                    className="text-blue-600 hover:text-blue-800 font-medium text-sm"
                   >
-                    Edit
+                    ✏️ Edit
                   </button>
                   <button
                     onClick={() => handleDelete(service._id)}
-                    className="text-red-600 hover:underline text-sm"
+                    className="text-red-600 hover:text-red-800 font-medium text-sm"
                   >
-                    Delete
+                    🗑️ Delete
                   </button>
                 </div>
               </div>
