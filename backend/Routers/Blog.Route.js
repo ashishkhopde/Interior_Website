@@ -6,7 +6,12 @@ const router = Router();
 router.get("/", getAllBlogs);
 router.get("/total", getTotalBlogs)
 router.get("/:id", getBlogById);
-router.post("/", createBlog);
+router.post("/", 
+    upload.fields([{
+        name: "blogImages", maxCount: 1
+    }]),
+    createBlog
+);
 router.put("/:id", updateBlog);
 router.delete("/:id", deleteBlog);
 

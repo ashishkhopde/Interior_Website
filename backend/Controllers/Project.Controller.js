@@ -1,4 +1,5 @@
 import ProjectModel from "../Models/Project.Model.js";
+import { uploadOnCloudinary } from "../Utils/cloudnary.js";
 
 export const getAllProjects = async (req, res) => {
     try {
@@ -32,8 +33,21 @@ export const getTotalProjects = async (req, res) => {
 export const createProjects = async (req, res) => {
     try {
 
-        const { client, year, author, image, description, projectTitle } = req.body;
-        const newProject = await ProjectModel.create({ client, year, author, image, description, projectTitle });
+        const { client, year, author, description, projectTitle } = req.body;
+        const projectImages = req.files?.projectImages[0]?.path;
+
+        const image = await uploadOnCloudinary(projectImages);
+
+        // console.log("Uploaded image info:", image);
+
+        if (!image) {
+            console.log("Image upload failed");
+            return res.status(500).json({
+                message: "Image upload failed"
+            });
+        }
+
+        const newProject = await ProjectModel.create({ client, year, author, image: image.url, description, projectTitle });
 
         res.status(201).json({
             message: "Post created successfully",

@@ -6,7 +6,12 @@ const router = Router();
 router.get("/", getServices);
 router.get("/total", getTotalServices);
 router.get("/:id", getServiceById);
-router.post("/", createService);
+router.post("/", 
+    upload.fields([{
+        name: "servicesImages", maxCount: 1
+    }]),
+    createService
+);
 router.put("/:id", updateService);
 router.delete("/:id", deleteService);
 

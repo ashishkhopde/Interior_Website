@@ -31,7 +31,22 @@ export const getTotalServices = async (req, res) => {
 
 export const createService = async (req, res) => {
     try {
-        const { title, description, image } = req.body;
+        const { title, description } = req.body;
+
+        const servicesImages = req.files?.servicesImages[0]?.path;
+
+        const image = await uploadOnCloudinary(servicesImages);
+
+        // console.log("Uploaded image info:", image);
+
+        if (!image) {
+            console.log("Image upload failed");
+            return res.status(500).json({
+                message: "Image upload failed"
+            });
+        }
+
+
         const newService = await ServiceModel.create({ title, description, image });
         res.status(201).json({
             message: "Service created successfully",

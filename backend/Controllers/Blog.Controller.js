@@ -15,7 +15,21 @@ export const getAllBlogs = async (req, res) => {
 
 export const createBlog = async (req, res) => {
     try {
-        const { title, description, image, author } = req.body;
+        const { title, description, author } = req.body;
+
+        const blogImages = req.files?.blogImages[0]?.path;
+
+        const image = await uploadOnCloudinary(blogImages);
+
+        // console.log("Uploaded image info:", image);
+
+        if (!image) {
+            console.log("Image upload failed");
+            return res.status(500).json({
+                message: "Image upload failed"
+            });
+        }
+
         const newBlog = await BlogModel.create({ title, description, image, author });
         res.status(201).json({
             message: "Blog created successfully",

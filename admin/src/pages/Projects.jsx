@@ -7,32 +7,34 @@ export default function Projects() {
     client: "",
     year: "",
     author: "",
-    image: "",
     description: "",
     projectTitle: "",
   });
+  const [imageFile, setImageFile] = useState(null); // ✅ file state
   const [status, setStatus] = useState("");
   const [editingProject, setEditingProject] = useState(null);
 
-  async function fetchProjects () {
-      try {
-        const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/project`);
-        console.log(res.data)
-        setProjects(res.data.project);
-      } catch (err) {
-        console.error("Error fetching projects:", err);
-      }
-    };
+  const fetchProjects = async () => {
+    try {
+      const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/project`);
+      setProjects(res.data.project);
+    } catch (err) {
+      console.error("Error fetching projects:", err);
+    }
+  };
 
-  // Fetch existing projects
   useEffect(() => {
     fetchProjects();
   }, []);
 
-
-  // Handle input
+  // Handle text input
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  // Handle file input
+  const handleFileChange = (e) => {
+    setImageFile(e.target.files[0]);
   };
 
   // Submit new or updated project
@@ -41,27 +43,44 @@ export default function Projects() {
     setStatus(editingProject ? "Updating..." : "Saving...");
 
     try {
+      const data = new FormData();
+
+      // Append text fields
+      Object.keys(formData).forEach((key) => {
+        data.append(key, formData[key]);
+      });
+
+      // Append image only if chosen
+      if (imageFile) {
+        data.append("projectImages", imageFile);
+      }
+
+      let res;
+
       if (editingProject) {
-        // Update existing project
-        const res = await axios.put(
+        // Update project
+        res = await axios.put(
           `${import.meta.env.VITE_BASE_URL}/project/${editingProject._id}`,
-          formData
+          data,
+          { headers: { "Content-Type": "multipart/form-data" } }
         );
-        if (res.status === 200) {
-          setStatus("Project updated successfully!");
-          setEditingProject(null);
-          fetchProjects();
-        }
       } else {
-        // Add new project
-        const res = await axios.post(
+        // Create project
+        res = await axios.post(
           `${import.meta.env.VITE_BASE_URL}/project`,
-          formData
+          data,
+          { headers: { "Content-Type": "multipart/form-data" } }
         );
-        if (res.status === 200 || res.status === 201) {
-          setStatus("Project added successfully!");
-          setProjects((prev) => [...prev, res.data.project]);
-        }
+      }
+
+      if (res.status === 200 || res.status === 201) {
+        setStatus(
+          editingProject
+            ? "Project updated successfully!"
+            : "Project added successfully!"
+        );
+        setEditingProject(null);
+        fetchProjects();
       }
 
       // Reset form
@@ -69,10 +88,10 @@ export default function Projects() {
         client: "",
         year: "",
         author: "",
-        image: "",
         description: "",
         projectTitle: "",
       });
+      setImageFile(null);
     } catch (err) {
       console.error("Error submitting project:", err);
       setStatus("Error saving project.");
@@ -86,17 +105,16 @@ export default function Projects() {
       client: proj.client,
       year: proj.year,
       author: proj.author,
-      image: proj.image,
       description: proj.description,
       projectTitle: proj.projectTitle,
     });
+    setImageFile(null);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   // Delete project
   const handleDelete = async (id) => {
     if (!confirm("Are you sure you want to delete this project?")) return;
-
     try {
       const res = await axios.delete(`${import.meta.env.VITE_BASE_URL}/project/${id}`);
       if (res.status === 200) {
@@ -120,7 +138,11 @@ export default function Projects() {
             {editingProject ? "Edit Project" : "Add New Project"}
           </h2>
 
-          <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <form
+            onSubmit={handleSubmit}
+            className="grid grid-cols-1 md:grid-cols-2 gap-6"
+            encType="multipart/form-data"
+          >
             <input
               name="projectTitle"
               value={formData.projectTitle}
@@ -153,14 +175,17 @@ export default function Projects() {
               className="border border-gray-300 rounded-md px-4 py-3 text-black w-full"
               required
             />
+
+            {/* ✅ File input for image */}
             <input
-              name="image"
-              value={formData.image}
-              onChange={handleChange}
-              placeholder="Image URL"
+              type="file"
+              name="projectImages"
+              onChange={handleFileChange}
+              accept="image/*"
               className="border border-gray-300 rounded-md px-4 py-3 text-black w-full md:col-span-2"
-              required
+              required={!editingProject} // image required only for new project
             />
+
             <textarea
               name="description"
               value={formData.description}
@@ -169,6 +194,7 @@ export default function Projects() {
               className="border border-gray-300 rounded-md px-4 py-3 text-black h-32 resize-none w-full md:col-span-2"
               required
             />
+
             <button
               type="submit"
               className="bg-gray-900 text-white px-6 py-3 rounded-md hover:bg-gray-800 transition md:col-span-2"
@@ -206,7 +232,6 @@ export default function Projects() {
                   {proj.description}
                 </p>
 
-                {/* Edit / Delete Buttons */}
                 <div className="flex justify-between">
                   <button
                     onClick={() => handleEdit(proj)}
