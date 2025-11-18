@@ -87,14 +87,14 @@ export default function AdminNavbar() {
       {isOpen && (
         <div className="md:hidden bg-gray-800 text-gray-200 px-4 pb-4 space-y-3">
           {navLinks.map((link) => (
-            <a
+            <Link
               key={link.name}
-              href={link.href}
+              to={link.href}
               className="block py-2 border-b border-gray-700 hover:text-blue-400"
               onClick={() => setIsOpen(false)}
             >
               {link.name}
-            </a>
+            </Link>
           ))}
 
           <button

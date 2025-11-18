@@ -31,7 +31,7 @@ function AppContent() {
       {!hideNavbar && <AdminNavbar />}
 
       <Routes>
-        {/* ✅ Protected (only if token exists) */}
+        {/* Protected (only if token exists) */}
         <Route
           path="/"
           element={
@@ -73,7 +73,7 @@ function AppContent() {
           }
         />
 
-        {/* 🟢 Public routes */}
+        {/* Public routes */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<AdminRegister />} />
       </Routes>

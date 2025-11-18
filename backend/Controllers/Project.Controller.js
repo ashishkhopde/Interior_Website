@@ -100,7 +100,7 @@ export const updateProjectById = async (req, res) => {
 
     let image;
 
-    // ✅ If new image uploaded, upload to Cloudinary
+    // If new image uploaded, upload to Cloudinary
     if (req.files && req.files.projectImage && req.files.projectImage.length > 0) {
       const projectImagePath = req.files.projectImage[0].path;
       const uploadedImage = await uploadOnCloudinary(projectImagePath);
@@ -114,7 +114,7 @@ export const updateProjectById = async (req, res) => {
 
       image = uploadedImage.url;
     } else {
-      // ✅ No new image uploaded → keep existing one
+      // No new image uploaded → keep existing one
       const existingProject = await ProjectModel.findById(id);
       if (!existingProject) {
         return res.status(404).json({ message: "Project not found" });
@@ -122,7 +122,7 @@ export const updateProjectById = async (req, res) => {
       image = existingProject.image;
     }
 
-    // ✅ Perform the update
+    // Perform the update
     const updatedProject = await ProjectModel.findByIdAndUpdate(
       id,
       { client, year, author, image, description, projectTitle },
