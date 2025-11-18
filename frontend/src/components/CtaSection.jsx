@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import circle from "../assets/img/circle-border.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -13,6 +13,14 @@ const fadeUp = {
 };
 
 export default function CtaSection() {
+  const navigate = useNavigate();
+
+  const handleClick = (e) => {
+    e.preventDefault(); // stop default reload
+    navigate("/contact");
+    window.scrollTo({ top: 0, behavior: "smooth" }); // smooth scroll to top
+  };
+
   return (
     <motion.section
       className="cta-banner-section-2"
@@ -54,25 +62,27 @@ export default function CtaSection() {
                 viewport={{ once: true }}
                 custom={0.5}
               >
-                Crafting spaces that <br /> the reflect style
+                Crafting spaces that <br /> reflect style
               </motion.h2>
             </div>
 
-            <motion.a
-              href="/contact"
-              className="theme-btn bg-white padding-style wow fadeInUp"
-              data-wow-delay=".7s"
+            <motion.div
               variants={fadeUp}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
               custom={0.7}
+              className="wow fadeInUp"
+              data-wow-delay=".7s"
             >
-              <Link to="/contact" onClick={()=>scrollTo(0,0)}>
-              Get In Touch
-              <i className="fas fa-long-arrow-right"></i>
-              </Link>
-            </motion.a>
+              <button
+                onClick={handleClick}
+                className="theme-btn bg-white hover:text-white padding-style"
+              >
+                Get In Touch
+                <i className="fas fa-long-arrow-right"></i>
+              </button>
+            </motion.div>
           </div>
         </div>
       </div>
