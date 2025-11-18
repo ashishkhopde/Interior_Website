@@ -12,49 +12,67 @@ export default function Blog() {
   const [status, setStatus] = useState("");
   const [editingBlogId, setEditingBlogId] = useState(null);
 
-  // Fetch blogs
+  // ✅ Redirect if not logged in
   useEffect(() => {
-    const fetchBlogs = async () => {
-      try {
-        const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/blog`);
-        setBlogs(res.data.blogs);
-      } catch (err) {
-        console.error("Error fetching blogs:", err);
-      }
-    };
-    fetchBlogs();
+    const token = localStorage.getItem("token");
+    if (!token) {
+      window.location.href = "/login";
+    } else {
+      fetchBlogs();
+    }
   }, []);
 
-  // Handle text input
+  // ✅ Fetch all blogs (public)
+  const fetchBlogs = async () => {
+    try {
+      const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/blog`);
+      setBlogs(res.data.blogs || res.data.blog); // support both naming styles
+    } catch (err) {
+      console.error("Error fetching blogs:", err);
+    }
+  };
+
+  // ✅ Handle text input
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  // Handle file input
+  // ✅ Handle file input
   const handleFileChange = (e) => {
     setImageFile(e.target.files[0]);
   };
 
-  // Add or Update Blog
+  // ✅ Add or Update Blog
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus(editingBlogId ? "Updating..." : "Saving...");
 
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setStatus("Unauthorized! Please log in first.");
+      return;
+    }
+
     try {
       const data = new FormData();
       Object.keys(formData).forEach((key) => data.append(key, formData[key]));
-      if (imageFile) data.append("blogImage", imageFile); // ✅ must match backend field
+      if (imageFile) data.append("blogImage", imageFile); // must match backend field
+
+      const headers = {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${token}`, // ✅ add token
+      };
 
       let res;
       if (editingBlogId) {
         res = await axios.put(
           `${import.meta.env.VITE_BASE_URL}/blog/${editingBlogId}`,
           data,
-          { headers: { "Content-Type": "multipart/form-data" } }
+          { headers }
         );
       } else {
         res = await axios.post(`${import.meta.env.VITE_BASE_URL}/blog`, data, {
-          headers: { "Content-Type": "multipart/form-data" },
+          headers,
         });
       }
 
@@ -65,10 +83,7 @@ export default function Blog() {
             : "✅ Blog added successfully!"
         );
         setEditingBlogId(null);
-
-        // Refresh blogs
-        const refreshed = await axios.get(`${import.meta.env.VITE_BASE_URL}/blog`);
-        setBlogs(refreshed.data.blogs);
+        fetchBlogs();
       }
 
       // Reset
@@ -77,11 +92,20 @@ export default function Blog() {
       setTimeout(() => setStatus(""), 3000);
     } catch (err) {
       console.error("Error saving blog:", err);
-      setStatus("❌ Error saving blog.");
+      setStatus(
+        err.response?.data?.message ||
+          "❌ Error saving blog. Please log in again."
+      );
+
+      // auto logout if token invalid
+      if (err.response?.status === 401 || err.response?.status === 403) {
+        localStorage.removeItem("token");
+        window.location.href = "/login";
+      }
     }
   };
 
-  // Edit blog
+  // ✅ Edit Blog
   const handleEdit = (blog) => {
     setFormData({
       title: blog.title,
@@ -94,20 +118,40 @@ export default function Blog() {
     setStatus("✏️ Editing mode enabled");
   };
 
-  // Delete blog
+  // ✅ Delete Blog
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this blog?")) return;
+
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setStatus("Unauthorized! Please log in first.");
+      return;
+    }
+
     try {
-      await axios.delete(`${import.meta.env.VITE_BASE_URL}/blog/${id}`);
-      setBlogs((prev) => prev.filter((b) => b._id !== id));
-      setStatus("🗑️ Blog deleted successfully!");
+      const res = await axios.delete(
+        `${import.meta.env.VITE_BASE_URL}/blog/${id}`,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      if (res.status === 200) {
+        setBlogs((prev) => prev.filter((b) => b._id !== id));
+        setStatus("🗑️ Blog deleted successfully!");
+      }
       setTimeout(() => setStatus(""), 3000);
     } catch (err) {
       console.error("Error deleting blog:", err);
-      setStatus("❌ Error deleting blog.");
+      setStatus(
+        err.response?.data?.message ||
+          "❌ Error deleting blog. Please log in again."
+      );
+      if (err.response?.status === 401 || err.response?.status === 403) {
+        localStorage.removeItem("token");
+        window.location.href = "/login";
+      }
     }
   };
 
+  // ✅ Cancel Edit
   const handleCancel = () => {
     setEditingBlogId(null);
     setFormData({ title: "", description: "", author: "" });
@@ -120,7 +164,7 @@ export default function Blog() {
       <div className="max-w-7xl mx-auto">
         <h1 className="text-3xl font-bold text-gray-800 mb-6">Blogs</h1>
 
-        {/* Add/Edit Form */}
+        {/* ✅ Add/Edit Form */}
         <div className="bg-white p-6 rounded-lg shadow-md mb-10">
           <h2 className="text-xl font-semibold text-gray-800 mb-4">
             {editingBlogId ? "Edit Blog" : "Add New Blog"}
@@ -189,7 +233,7 @@ export default function Blog() {
           {status && <p className="text-sm text-gray-500 mt-3">{status}</p>}
         </div>
 
-        {/* Blog Cards */}
+        {/* ✅ Blog Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {blogs.map((blog) => (
             <div

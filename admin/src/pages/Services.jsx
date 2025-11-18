@@ -7,55 +7,73 @@ export default function Services() {
     title: "",
     description: "",
   });
-  const [imageFile, setImageFile] = useState(null); // ✅ store selected file
+  const [imageFile, setImageFile] = useState(null);
   const [status, setStatus] = useState("");
   const [editingServiceId, setEditingServiceId] = useState(null);
 
-  // Fetch existing services
+  // ✅ Redirect if not logged in
   useEffect(() => {
-    const fetchServices = async () => {
-      try {
-        const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/service`);
-        setServices(res.data.services);
-      } catch (err) {
-        console.error("Error fetching services:", err);
-      }
-    };
-    fetchServices();
+    const token = localStorage.getItem("token");
+    if (!token) {
+      window.location.href = "/login";
+    } else {
+      fetchServices();
+    }
   }, []);
 
-  // Handle text inputs
+  // ✅ Fetch services (public)
+  const fetchServices = async () => {
+    try {
+      const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/service`);
+      setServices(res.data.services || res.data.service || []);
+    } catch (err) {
+      console.error("Error fetching services:", err);
+    }
+  };
+
+  // ✅ Handle input fields
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  // Handle file input
+  // ✅ Handle file input
   const handleFileChange = (e) => {
     setImageFile(e.target.files[0]);
   };
 
-  // Add or Update Service
+  // ✅ Add or Update Service (Protected)
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus(editingServiceId ? "Updating service..." : "Saving service...");
 
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setStatus("Unauthorized! Please log in first.");
+      return;
+    }
+
     try {
       const data = new FormData();
       Object.keys(formData).forEach((key) => data.append(key, formData[key]));
-      if (imageFile) data.append("serviceImage", imageFile); // ✅ matches multer field
+      if (imageFile) data.append("serviceImage", imageFile);
+
+      const headers = {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${token}`, // ✅ token added
+      };
 
       let res;
       if (editingServiceId) {
         res = await axios.put(
           `${import.meta.env.VITE_BASE_URL}/service/${editingServiceId}`,
           data,
-          { headers: { "Content-Type": "multipart/form-data" } }
+          { headers }
         );
       } else {
         res = await axios.post(
           `${import.meta.env.VITE_BASE_URL}/service`,
           data,
-          { headers: { "Content-Type": "multipart/form-data" } }
+          { headers }
         );
       }
 
@@ -66,10 +84,7 @@ export default function Services() {
             : "✅ Service added successfully!"
         );
         setEditingServiceId(null);
-
-        // Refresh data
-        const refreshed = await axios.get(`${import.meta.env.VITE_BASE_URL}/service`);
-        setServices(refreshed.data.services);
+        fetchServices();
       }
 
       // Reset form
@@ -78,11 +93,20 @@ export default function Services() {
       setTimeout(() => setStatus(""), 3000);
     } catch (err) {
       console.error("Error saving service:", err);
-      setStatus("❌ Error saving service.");
+      setStatus(
+        err.response?.data?.message ||
+          "❌ Error saving service. Please log in again."
+      );
+
+      // Auto logout if token invalid
+      if (err.response?.status === 401 || err.response?.status === 403) {
+        localStorage.removeItem("token");
+        window.location.href = "/login";
+      }
     }
   };
 
-  // Handle edit
+  // ✅ Edit Service
   const handleEdit = (service) => {
     setFormData({
       title: service.title,
@@ -94,21 +118,41 @@ export default function Services() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // Handle delete
+  // ✅ Delete Service (Protected)
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this service?")) return;
+
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setStatus("Unauthorized! Please log in first.");
+      return;
+    }
+
     try {
-      await axios.delete(`${import.meta.env.VITE_BASE_URL}/service/${id}`);
-      setServices((prev) => prev.filter((s) => s._id !== id));
-      setStatus("🗑️ Service deleted successfully!");
+      const res = await axios.delete(
+        `${import.meta.env.VITE_BASE_URL}/service/${id}`,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      if (res.status === 200) {
+        setServices((prev) => prev.filter((s) => s._id !== id));
+        setStatus("🗑️ Service deleted successfully!");
+      }
       setTimeout(() => setStatus(""), 3000);
     } catch (err) {
       console.error("Error deleting service:", err);
-      setStatus("❌ Error deleting service.");
+      setStatus(
+        err.response?.data?.message ||
+          "❌ Error deleting service. Please log in again."
+      );
+      if (err.response?.status === 401 || err.response?.status === 403) {
+        localStorage.removeItem("token");
+        window.location.href = "/login";
+      }
     }
   };
 
-  // Cancel editing
+  // ✅ Cancel Editing
   const handleCancel = () => {
     setEditingServiceId(null);
     setFormData({ title: "", description: "" });
@@ -121,7 +165,7 @@ export default function Services() {
       <div className="max-w-7xl mx-auto">
         <h1 className="text-3xl font-bold text-gray-800 mb-6">Services</h1>
 
-        {/* Add / Edit Service Form */}
+        {/* ✅ Add / Edit Form */}
         <div className="bg-white p-6 rounded-lg shadow-md mb-10">
           <h2 className="text-xl font-semibold text-gray-800 mb-4">
             {editingServiceId ? "Edit Service" : "Add New Service"}
@@ -141,7 +185,7 @@ export default function Services() {
               required
             />
 
-            {/* ✅ File input for image */}
+            {/* ✅ File input */}
             <input
               type="file"
               name="serviceImage"
@@ -184,7 +228,7 @@ export default function Services() {
           )}
         </div>
 
-        {/* Service Cards */}
+        {/* ✅ Service Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service) => (
             <div

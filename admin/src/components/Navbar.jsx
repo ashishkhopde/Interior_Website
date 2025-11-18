@@ -21,6 +21,8 @@ export default function AdminNavbar() {
 
   const handleLogout = () => {
     // Replace with real logout logic (e.g., clear token, redirect)
+    localStorage.removeItem("token");
+    window.location.href = "/login";
     alert("Logging out...");
   };
 
@@ -40,9 +42,8 @@ export default function AdminNavbar() {
               <Link
                 key={link.name}
                 to={link.href}
-                className={`transition-colors ${
-                  isActive ? "text-blue-400 font-semibold" : "hover:text-blue-400"
-                }`}
+                className={`transition-colors ${isActive ? "text-blue-400 font-semibold" : "hover:text-blue-400"
+                  }`}
               >
                 {link.name}
               </Link>
@@ -61,12 +62,6 @@ export default function AdminNavbar() {
 
             {profileMenu && (
               <div className="absolute right-0 mt-2 w-44 bg-white text-gray-900 rounded-md shadow-lg border border-gray-100">
-                <a
-                  href="/admin/profile"
-                  className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100"
-                >
-                  <Settings size={16} /> Settings
-                </a>
                 <button
                   onClick={handleLogout}
                   className="flex items-center gap-2 w-full text-left px-4 py-2 hover:bg-gray-100"

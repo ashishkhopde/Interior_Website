@@ -1,25 +1,82 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import React from "react";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 
-import AdminNavbar from './components/Navbar';
-import Dashboard from './pages/Dashboard';
-import Message from './pages/Message';
-import Projects from './pages/Projects';
-import Blog from './pages/Blog';
-import Services from './pages/Services';
-
+import AdminNavbar from "./components/Navbar";
+import Dashboard from "./pages/Dashboard";
+import Message from "./pages/Message";
+import Projects from "./pages/Projects";
+import Blog from "./pages/Blog";
+import Services from "./pages/Services";
+import Login from "./pages/Login";
+import PrivateRoute from "./components/PrivateRoute";
+import AdminRegister from "./pages/Register";
 
 export default function App() {
   return (
     <BrowserRouter>
-      <AdminNavbar/>
-      <Routes>
-        <Route path="/" element={<Dashboard/>}/>
-        <Route path="/message" element={<Message/>}/>
-        <Route path="/projects" element={<Projects/>}/>
-        <Route path="/blog" element={<Blog/>}/>
-        <Route path="/services" element={<Services/>}/>
-      </Routes>
+      <AppContent />
     </BrowserRouter>
-  )
+  );
+}
+
+// 👇 Separate component so we can use `useLocation`
+function AppContent() {
+  const location = useLocation();
+
+  // Hide navbar on login/register pages
+  const hideNavbar = ["/login", "/register"].includes(location.pathname);
+
+  return (
+    <>
+      {!hideNavbar && <AdminNavbar />}
+
+      <Routes>
+        {/* ✅ Protected (only if token exists) */}
+        <Route
+          path="/"
+          element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/message"
+          element={
+            <PrivateRoute>
+              <Message />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/projects"
+          element={
+            <PrivateRoute>
+              <Projects />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/blog"
+          element={
+            <PrivateRoute>
+              <Blog />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/services"
+          element={
+            <PrivateRoute>
+              <Services />
+            </PrivateRoute>
+          }
+        />
+
+        {/* 🟢 Public routes */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<AdminRegister />} />
+      </Routes>
+    </>
+  );
 }

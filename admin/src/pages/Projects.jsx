@@ -10,10 +10,21 @@ export default function Projects() {
     description: "",
     projectTitle: "",
   });
-  const [imageFile, setImageFile] = useState(null); // ✅ file state
+  const [imageFile, setImageFile] = useState(null);
   const [status, setStatus] = useState("");
   const [editingProject, setEditingProject] = useState(null);
 
+  // ✅ Redirect if not logged in
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      window.location.href = "/login";
+    } else {
+      fetchProjects();
+    }
+  }, []);
+
+  // ✅ Fetch all projects (public)
   const fetchProjects = async () => {
     try {
       const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/project`);
@@ -23,24 +34,26 @@ export default function Projects() {
     }
   };
 
-  useEffect(() => {
-    fetchProjects();
-  }, []);
-
-  // Handle text input
+  // ✅ Handle text inputs
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  // Handle file input
+  // ✅ Handle file input
   const handleFileChange = (e) => {
     setImageFile(e.target.files[0]);
   };
 
-  // Submit new or updated project
+  // ✅ Submit (Create or Update)
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus(editingProject ? "Updating..." : "Saving...");
+
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setStatus("Unauthorized! Please log in first.");
+      return;
+    }
 
     try {
       const data = new FormData();
@@ -50,34 +63,38 @@ export default function Projects() {
         data.append(key, formData[key]);
       });
 
-      // Append image only if chosen
+      // Append image file
       if (imageFile) {
         data.append("projectImages", imageFile);
       }
 
-      let res;
+      const headers = {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${token}`, // ✅ include token
+      };
 
+      let res;
       if (editingProject) {
         // Update project
         res = await axios.put(
           `${import.meta.env.VITE_BASE_URL}/project/${editingProject._id}`,
           data,
-          { headers: { "Content-Type": "multipart/form-data" } }
+          { headers }
         );
       } else {
-        // Create project
+        // Create new project
         res = await axios.post(
           `${import.meta.env.VITE_BASE_URL}/project`,
           data,
-          { headers: { "Content-Type": "multipart/form-data" } }
+          { headers }
         );
       }
 
       if (res.status === 200 || res.status === 201) {
         setStatus(
           editingProject
-            ? "Project updated successfully!"
-            : "Project added successfully!"
+            ? "✅ Project updated successfully!"
+            : "✅ Project added successfully!"
         );
         setEditingProject(null);
         fetchProjects();
@@ -94,11 +111,18 @@ export default function Projects() {
       setImageFile(null);
     } catch (err) {
       console.error("Error submitting project:", err);
-      setStatus("Error saving project.");
+      setStatus(
+        err.response?.data?.message ||
+          "❌ Error saving project. Please log in again."
+      );
+      if (err.response?.status === 403 || err.response?.status === 401) {
+        localStorage.removeItem("token");
+        window.location.href = "/login";
+      }
     }
   };
 
-  // Edit project
+  // ✅ Edit project
   const handleEdit = (proj) => {
     setEditingProject(proj);
     setFormData({
@@ -112,18 +136,36 @@ export default function Projects() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // Delete project
+  // ✅ Delete project
   const handleDelete = async (id) => {
     if (!confirm("Are you sure you want to delete this project?")) return;
+
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setStatus("Unauthorized! Please log in first.");
+      return;
+    }
+
     try {
-      const res = await axios.delete(`${import.meta.env.VITE_BASE_URL}/project/${id}`);
+      const res = await axios.delete(
+        `${import.meta.env.VITE_BASE_URL}/project/${id}`,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
       if (res.status === 200) {
         setProjects((prev) => prev.filter((proj) => proj._id !== id));
-        setStatus("Project deleted successfully!");
+        setStatus("🗑️ Project deleted successfully!");
       }
     } catch (err) {
       console.error("Error deleting project:", err);
-      setStatus("Failed to delete project.");
+      setStatus(
+        err.response?.data?.message ||
+          "❌ Failed to delete project. Please log in again."
+      );
+      if (err.response?.status === 403 || err.response?.status === 401) {
+        localStorage.removeItem("token");
+        window.location.href = "/login";
+      }
     }
   };
 
@@ -132,7 +174,7 @@ export default function Projects() {
       <div className="max-w-7xl mx-auto">
         <h1 className="text-3xl font-bold text-gray-800 mb-6">Projects</h1>
 
-        {/* Add or Edit Project Form */}
+        {/* ✅ Add or Edit Project Form */}
         <div className="bg-white p-6 rounded-lg shadow-md mb-10">
           <h2 className="text-xl font-semibold text-gray-800 mb-4">
             {editingProject ? "Edit Project" : "Add New Project"}
@@ -183,7 +225,7 @@ export default function Projects() {
               onChange={handleFileChange}
               accept="image/*"
               className="border border-gray-300 rounded-md px-4 py-3 text-black w-full md:col-span-2"
-              required={!editingProject} // image required only for new project
+              required={!editingProject}
             />
 
             <textarea
@@ -206,7 +248,7 @@ export default function Projects() {
           {status && <p className="text-sm text-gray-500 mt-3">{status}</p>}
         </div>
 
-        {/* Project Cards */}
+        {/* ✅ Project Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((proj) => (
             <div

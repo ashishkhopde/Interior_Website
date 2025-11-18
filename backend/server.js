@@ -7,6 +7,7 @@ import ProjectRoute from './Routers/Project.Route.js';
 import BlogRoute from './Routers/Blog.Route.js';
 import ServiceRoute from './Routers/Service.Route.js';
 import ContactRoute from './Routers/Contact.Route.js';
+import AdminRoute from './Routers/Admin.Route.js';
 
 connectDB();
 
@@ -19,6 +20,7 @@ app.get("/", (req, res) => {
     res.send("Hello from backend");
 });
 
+app.use("/api/admin", AdminRoute);
 app.use("/api/project", ProjectRoute);
 app.use("/api/blog", BlogRoute);
 app.use("/api/service", ServiceRoute);
