@@ -7,13 +7,18 @@ const router = Router();
 router.get("/", getAllBlogs);
 router.get("/total", getTotalBlogs)
 router.get("/:id", getBlogById);
-router.post("/", 
+router.post("/",
     upload.fields([{
         name: "blogImage", maxCount: 1
     }]),
     createBlog
 );
-router.put("/:id", updateBlog);
+router.put("/:id",
+    upload.fields([{
+        name: "blogImage", maxCount: 1
+    }]),
+    updateBlog
+);
 router.delete("/:id", deleteBlog);
 
 export default router;

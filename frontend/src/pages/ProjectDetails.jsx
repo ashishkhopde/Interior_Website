@@ -243,57 +243,7 @@ export default function ProjectDetails() {
                 </section>
 
                 {/* CTA Section */}
-                <section className="cta-banner-section-2">
-                    <div className="container">
-                        <div className="cta-banner-wrapper-2">
-
-                            <motion.div
-                                className="cta-image"
-                                initial="hidden"
-                                whileInView="visible"
-                                viewport={{ once: true }}
-                                variants={fadeUp}
-                                custom={0.3}
-                                whileHover={{ scale: 1.05 }}
-                            >
-                                <img src="https://modinatheme.com/oraxis/wp-content/uploads/2024/10/cta-img.png" alt="cta-img" />
-                                <div className="circle-shape">
-                                    <img src="https://modinatheme.com/oraxis/wp-content/uploads/2024/10/circle-border.png" alt="shape-img" />
-                                </div>
-                            </motion.div>
-
-                            <div className="section-title-area">
-                                <motion.div
-                                    className="section-title mb-0"
-                                    initial="hidden"
-                                    whileInView="visible"
-                                    viewport={{ once: true }}
-                                    variants={fadeUp}
-                                    custom={0.5}
-                                >
-                                    <h2 className="text-white">
-                                        Crafting spaces that <br /> the reflect style
-                                    </h2>
-                                </motion.div>
-
-                                <motion.a
-                                    href="about.html"
-                                    className="theme-btn bg-white padding-style"
-                                    variants={fadeUp}
-                                    custom={0.7}
-                                    initial="hidden"
-                                    whileInView="visible"
-                                    viewport={{ once: true }}
-                                    whileHover={{ scale: 1.05 }}
-                                >
-                                    Get In Touch
-                                    <i className="fas fa-long-arrow-right"></i>
-                                </motion.a>
-                            </div>
-
-                        </div>
-                    </div>
-                </section>
+                <CtaSection/>
 
             </>
             {/* Fragment End */}

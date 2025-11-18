@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 import CtaSection from '../components/CtaSection'
 import BreadcrumbContact from '../components/BreadcrumbSection'
-import ContactForm from '../components/ContactForm';
+import ContactForm from '../components/contact/ContactForm';
 
 const fadeUp = {
     hidden: { opacity: 0, y: 40 },
@@ -108,7 +108,7 @@ export default function Contact() {
                                                             Phone
                                                         </h3>
                                                         <h6>
-                                                            <a href="tel:0123456789101" className="me-3">
+                                                            <a href="tel:+918109561993" className="me-3">
                                                                 +91 810 956 1993
                                                             </a>
 

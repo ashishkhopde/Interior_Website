@@ -13,7 +13,12 @@ router.post('/',
     }]),
     createProjects
 );
-router.put('/:id', updateProjectById);
+router.put('/:id', 
+    upload.fields([{
+        name: "projectImages", maxCount: 1
+    }]),
+    updateProjectById
+);
 router.delete('/:id', deleteProjectById);
 
 export default router;

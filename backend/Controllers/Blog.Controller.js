@@ -75,19 +75,50 @@ export const getBlogById = async (req, res) => {
 }
 
 export const updateBlog = async (req, res) => {
-    try {
-        const { id } = req.params;
-        const { title, description, image, author } = req.body;
-        const updatedBlog = await BlogModel.findByIdAndUpdate(id, { title, description, image, author });
-        res.status(200).json({
-            message: "Blog updated successfully",
-            blog: updatedBlog
+  try {
+    const { id } = req.params;
+
+    const { title, description, author } = req.body;
+
+    let image; 
+
+    if (req.files && req.files.blogImage && req.files.blogImage.length > 0) {
+      const blogImagePath = req.files.blogImage[0].path;
+      const uploadedImage = await uploadOnCloudinary(blogImagePath);
+
+      if (!uploadedImage) {
+        console.log("Image upload failed");
+        return res.status(500).json({
+          message: "Image upload failed",
         });
-    } catch (err) {
-        console.log("Error in updating blog:", err);
-        res.status(500).json({ message: "Server Error" });
+      }
+
+      image = uploadedImage.url;
+    } else {
+      const existingBlog = await BlogModel.findById(id);
+      if (!existingBlog) {
+        return res.status(404).json({ message: "Blog not found" });
+      }
+      image = existingBlog.image;
     }
-}
+
+
+    const updatedBlog = await BlogModel.findByIdAndUpdate(
+      id,
+      { title, description, image, author },
+      { new: true }
+    );
+
+    res.status(200).json({
+      message: "Blog updated successfully",
+      blog: updatedBlog,
+    });
+  } catch (err) {
+    console.log("Error in updating blog:", err);
+    res.status(500).json({ message: "Server Error", error: err.message });
+  }
+};
+
 
 export const deleteBlog = async (req, res) => {
     try {

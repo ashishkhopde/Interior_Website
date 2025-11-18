@@ -92,19 +92,49 @@ export const deleteProjectById = async (req, res) => {
 }
 
 export const updateProjectById = async (req, res) => {
-    try {
-        const { id } = req.params;
-        const { client, year, author, image, description, pojectTitle } = req.body;
-        const updatedProject = await ProjectModel.findByIdAndUpdate(
-            id,
-            { client, year, author, image, description, pojectTitle }
-        );
-        res.status(200).json({
-            message: "Post updated successfully",
-            project: updatedProject
+  try {
+    const { id } = req.params;
+
+    // Extract text fields
+    const { client, year, author, description, projectTitle } = req.body;
+
+    let image;
+
+    // ✅ If new image uploaded, upload to Cloudinary
+    if (req.files && req.files.projectImage && req.files.projectImage.length > 0) {
+      const projectImagePath = req.files.projectImage[0].path;
+      const uploadedImage = await uploadOnCloudinary(projectImagePath);
+
+      if (!uploadedImage) {
+        console.log("Image upload failed");
+        return res.status(500).json({
+          message: "Image upload failed",
         });
-    } catch (err) {
-        console.log("Error in updating post:", err);
-        res.status(500).json({ message: "Server Error" });
+      }
+
+      image = uploadedImage.url;
+    } else {
+      // ✅ No new image uploaded → keep existing one
+      const existingProject = await ProjectModel.findById(id);
+      if (!existingProject) {
+        return res.status(404).json({ message: "Project not found" });
+      }
+      image = existingProject.image;
     }
-}
+
+    // ✅ Perform the update
+    const updatedProject = await ProjectModel.findByIdAndUpdate(
+      id,
+      { client, year, author, image, description, projectTitle },
+      { new: true }
+    );
+
+    res.status(200).json({
+      message: "Project updated successfully",
+      project: updatedProject,
+    });
+  } catch (err) {
+    console.log("Error in updating project:", err);
+    res.status(500).json({ message: "Server Error", error: err.message });
+  }
+};

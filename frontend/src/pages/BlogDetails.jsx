@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import BreadcrumbContact from "../components/BreadcrumbSection";
+import CtaSection from "../components/CtaSection";
 
 const fadeUp = {
     hidden: { opacity: 0, y: 40 },
@@ -16,7 +17,7 @@ export default function BlogDetails() {
         <div className="ScrollSmoother-content">
 
             {/* Breadcrumb */}
-            <BreadcrumbContact name="Service Details" />
+            <BreadcrumbContact name="Blog Details" />
 
             <section className="blog-wrapper news-wrapper section-padding">
                 <div className="container">
@@ -225,31 +226,7 @@ export default function BlogDetails() {
             </section>
 
             {/* CTA SECTION */}
-            <section className="cta-banner-section-2">
-                <div className="container">
-                    <div className="cta-banner-wrapper-2">
-                        <div className="cta-image">
-                            <img src="https://modinatheme.com/oraxis/wp-content/uploads/2024/10/cta-img.png" alt="cta-img" />
-                            <div className="circle-shape">
-                                <img src="https://modinatheme.com/oraxis/wp-content/uploads/2024/10/circle-border.png" alt="shape-img" />
-                            </div>
-                        </div>
-
-                        <div className="section-title-area">
-                            <div className="section-title mb-0">
-                                <h2 className="text-white">
-                                    Crafting spaces that <br /> the reflect style
-                                </h2>
-                            </div>
-
-                            <a href="about.html" className="theme-btn bg-white padding-style">
-                                Get In Touch
-                                <i className="fas fa-long-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <CtaSection/>
 
         </div>
     );

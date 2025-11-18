@@ -181,7 +181,9 @@ export default function ServiceDetails() {
                                             </div>
                                             <p>Need help?</p>
                                             <h3>
-                                                <a href="tel:+8085550111">+(808) 555-0111</a>
+                                                <a href="tel:+918109561993" className="me-3">
+                                                                +91 810 956 1993
+                                                            </a>
                                             </h3>
                                             <p className="mt-3">
                                             Lorem Ipsum is simply is dumiomy is text Lorem Ipsum is simply is ou our o dummy text
@@ -217,51 +219,7 @@ export default function ServiceDetails() {
             </section>
 
             {/* CTA Section */}
-            <section className="cta-banner-section-2">
-                <div className="container">
-                    <div className="cta-banner-wrapper-2">
-
-                        <motion.div
-                            className="cta-image"
-                            initial={{ opacity: 0, y: 40 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 1 }}
-                            whileHover={{ scale: 1.03 }}
-                        >
-                            <img
-                                src="https://modinatheme.com/oraxis/wp-content/uploads/2024/10/cta-img.png"
-                                alt="cta-img"
-                            />
-                        </motion.div>
-
-                        <motion.div
-                            className="section-title-area"
-                            initial="hidden"
-                            whileInView="visible"
-                        >
-                            <motion.h2
-                                className="text-white"
-                                variants={fadeUp}
-                                custom={0.3}
-                            >
-                                Crafting spaces that <br /> reflect style
-                            </motion.h2>
-
-                            <motion.a
-                                href="about.html"
-                                className="theme-btn bg-white padding-style"
-                                variants={fadeUp}
-                                custom={0.5}
-                                whileHover={{ scale: 1.05 }}
-                            >
-                                Get In Touch
-                                <i className="fas fa-long-arrow-right"></i>
-                            </motion.a>
-                        </motion.div>
-
-                    </div>
-                </div>
-            </section>
+            <CtaSection/>
 
         </div>
     );
