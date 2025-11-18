@@ -87,9 +87,9 @@ export default function Pricing() {
                                     </ul>
 
                                     <div className="pricing-button">
-                                        <a href="contact.html" className="theme-btn theme-bg-2">
+                                        <Link to="/contact" className="theme-btn theme-bg-2">
                                             Purchase now <i className="fas fa-long-arrow-right"></i>
-                                        </a>
+                                        </Link>
                                     </div>
                                 </div>
                             </motion.div>
