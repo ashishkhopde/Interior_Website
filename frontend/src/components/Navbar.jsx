@@ -69,7 +69,7 @@ export default function Navbar() {
 
               {/* ===== Right Section ===== */}
               <div className="header-right d-flex justify-content-end align-items-center">
-                <div className="menu-cart hidden md:block">
+                {/* <div className="menu-cart hidden md:block">
                   <div className="cart-box">
                     <ul>
                       <li>
@@ -109,14 +109,14 @@ export default function Navbar() {
                   <a href="shop-cart.html" className="cart-icon">
                     <i className="far fa-shopping-cart"></i>
                   </a>
-                </div>
+                </div> */}
 
-                <a
+                {/* <a
                   href="#0"
                   className="search-trigger search-icon hidden md:block"
                 >
                   <i className="fal fa-search"></i>
-                </a>
+                </a> */}
 
                 <div className="header-button hidden md:block">
                   <Link to="/contact" className="theme-btn bg-red-2">
