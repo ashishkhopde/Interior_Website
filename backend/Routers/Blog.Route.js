@@ -8,33 +8,33 @@ import {
   getTotalBlogs
 } from "../Controllers/Blog.Controller.js";
 import { upload } from "../Middleware/multer.middleware.js";
-import { verifyToken } from "../Middleware/auth.middleware.js"; // ✅ import middleware
+import { verifyToken } from "../Middleware/auth.middleware.js"; 
 
 const router = Router();
 
-// 🟢 Public routes (no token required)
+// Public routes (no token required)
 router.get("/", getAllBlogs);
 router.get("/total", getTotalBlogs);
 router.get("/:id", getBlogById);
 
-// 🔐 Protected routes (admin only)
+// Protected routes (admin only)
 router.post(
   "/",
-  verifyToken, // ✅ verify JWT before creating
+  verifyToken, 
   upload.fields([{ name: "blogImage", maxCount: 1 }]),
   createBlog
 );
 
 router.put(
   "/:id",
-  verifyToken, // ✅ verify JWT before updating
+  verifyToken, 
   upload.fields([{ name: "blogImage", maxCount: 1 }]),
   updateBlog
 );
 
 router.delete(
   "/:id",
-  verifyToken, // ✅ verify JWT before deleting
+  verifyToken, 
   deleteBlog
 );
 

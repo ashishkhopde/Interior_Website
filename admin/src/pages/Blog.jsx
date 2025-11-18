@@ -12,7 +12,7 @@ export default function Blog() {
   const [status, setStatus] = useState("");
   const [editingBlogId, setEditingBlogId] = useState(null);
 
-  // ✅ Redirect if not logged in
+  // Redirect if not logged in
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -22,7 +22,7 @@ export default function Blog() {
     }
   }, []);
 
-  // ✅ Fetch all blogs (public)
+  // Fetch all blogs (public)
   const fetchBlogs = async () => {
     try {
       const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/blog`);
@@ -32,17 +32,17 @@ export default function Blog() {
     }
   };
 
-  // ✅ Handle text input
+  // Handle text input
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  // ✅ Handle file input
+  // Handle file input
   const handleFileChange = (e) => {
     setImageFile(e.target.files[0]);
   };
 
-  // ✅ Add or Update Blog
+  // Add or Update Blog
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus(editingBlogId ? "Updating..." : "Saving...");
@@ -105,7 +105,7 @@ export default function Blog() {
     }
   };
 
-  // ✅ Edit Blog
+  // Edit Blog
   const handleEdit = (blog) => {
     setFormData({
       title: blog.title,
@@ -118,7 +118,7 @@ export default function Blog() {
     setStatus("✏️ Editing mode enabled");
   };
 
-  // ✅ Delete Blog
+  // Delete Blog
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this blog?")) return;
 
@@ -151,7 +151,7 @@ export default function Blog() {
     }
   };
 
-  // ✅ Cancel Edit
+  // Cancel Edit
   const handleCancel = () => {
     setEditingBlogId(null);
     setFormData({ title: "", description: "", author: "" });
@@ -164,7 +164,7 @@ export default function Blog() {
       <div className="max-w-7xl mx-auto">
         <h1 className="text-3xl font-bold text-gray-800 mb-6">Blogs</h1>
 
-        {/* ✅ Add/Edit Form */}
+        {/* Add/Edit Form */}
         <div className="bg-white p-6 rounded-lg shadow-md mb-10">
           <h2 className="text-xl font-semibold text-gray-800 mb-4">
             {editingBlogId ? "Edit Blog" : "Add New Blog"}
@@ -192,7 +192,7 @@ export default function Blog() {
               required
             />
 
-            {/* ✅ File Input */}
+            {/* File Input */}
             <input
               type="file"
               name="blogImage"
@@ -233,7 +233,7 @@ export default function Blog() {
           {status && <p className="text-sm text-gray-500 mt-3">{status}</p>}
         </div>
 
-        {/* ✅ Blog Cards */}
+        {/* Blog Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {blogs.map((blog) => (
             <div

@@ -14,7 +14,7 @@ export default function Projects() {
   const [status, setStatus] = useState("");
   const [editingProject, setEditingProject] = useState(null);
 
-  // ✅ Redirect if not logged in
+  // Redirect if not logged in
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -24,7 +24,7 @@ export default function Projects() {
     }
   }, []);
 
-  // ✅ Fetch all projects (public)
+  // Fetch all projects (public)
   const fetchProjects = async () => {
     try {
       const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/project`);
@@ -34,17 +34,17 @@ export default function Projects() {
     }
   };
 
-  // ✅ Handle text inputs
+  // Handle text inputs
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  // ✅ Handle file input
+  // Handle file input
   const handleFileChange = (e) => {
     setImageFile(e.target.files[0]);
   };
 
-  // ✅ Submit (Create or Update)
+  // Submit (Create or Update)
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus(editingProject ? "Updating..." : "Saving...");
@@ -70,7 +70,7 @@ export default function Projects() {
 
       const headers = {
         "Content-Type": "multipart/form-data",
-        Authorization: `Bearer ${token}`, // ✅ include token
+        Authorization: `Bearer ${token}`, // include token
       };
 
       let res;
@@ -122,7 +122,7 @@ export default function Projects() {
     }
   };
 
-  // ✅ Edit project
+  // Edit project
   const handleEdit = (proj) => {
     setEditingProject(proj);
     setFormData({
@@ -136,7 +136,7 @@ export default function Projects() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // ✅ Delete project
+  // Delete project
   const handleDelete = async (id) => {
     if (!confirm("Are you sure you want to delete this project?")) return;
 
@@ -174,7 +174,7 @@ export default function Projects() {
       <div className="max-w-7xl mx-auto">
         <h1 className="text-3xl font-bold text-gray-800 mb-6">Projects</h1>
 
-        {/* ✅ Add or Edit Project Form */}
+        {/* Add or Edit Project Form */}
         <div className="bg-white p-6 rounded-lg shadow-md mb-10">
           <h2 className="text-xl font-semibold text-gray-800 mb-4">
             {editingProject ? "Edit Project" : "Add New Project"}
@@ -218,7 +218,7 @@ export default function Projects() {
               required
             />
 
-            {/* ✅ File input for image */}
+            {/* File input for image */}
             <input
               type="file"
               name="projectImages"
@@ -248,7 +248,7 @@ export default function Projects() {
           {status && <p className="text-sm text-gray-500 mt-3">{status}</p>}
         </div>
 
-        {/* ✅ Project Cards */}
+        {/* Project Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((proj) => (
             <div
