@@ -11,7 +11,7 @@ export default function Services() {
   const [status, setStatus] = useState("");
   const [editingServiceId, setEditingServiceId] = useState(null);
 
-  // ✅ Redirect if not logged in
+  // Redirect if not logged in
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -21,7 +21,7 @@ export default function Services() {
     }
   }, []);
 
-  // ✅ Fetch services (public)
+  // Fetch services (public)
   const fetchServices = async () => {
     try {
       const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/service`);
@@ -31,17 +31,17 @@ export default function Services() {
     }
   };
 
-  // ✅ Handle input fields
+  // Handle input fields
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  // ✅ Handle file input
+  // Handle file input
   const handleFileChange = (e) => {
     setImageFile(e.target.files[0]);
   };
 
-  // ✅ Add or Update Service (Protected)
+  // Add or Update Service (Protected)
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus(editingServiceId ? "Updating service..." : "Saving service...");
@@ -106,7 +106,7 @@ export default function Services() {
     }
   };
 
-  // ✅ Edit Service
+  // Edit Service
   const handleEdit = (service) => {
     setFormData({
       title: service.title,
@@ -118,7 +118,7 @@ export default function Services() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // ✅ Delete Service (Protected)
+  // Delete Service (Protected)
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this service?")) return;
 
@@ -152,7 +152,7 @@ export default function Services() {
     }
   };
 
-  // ✅ Cancel Editing
+  // Cancel Editing
   const handleCancel = () => {
     setEditingServiceId(null);
     setFormData({ title: "", description: "" });
@@ -165,7 +165,7 @@ export default function Services() {
       <div className="max-w-7xl mx-auto">
         <h1 className="text-3xl font-bold text-gray-800 mb-6">Services</h1>
 
-        {/* ✅ Add / Edit Form */}
+        {/* Add / Edit Form */}
         <div className="bg-white p-6 rounded-lg shadow-md mb-10">
           <h2 className="text-xl font-semibold text-gray-800 mb-4">
             {editingServiceId ? "Edit Service" : "Add New Service"}
@@ -185,7 +185,7 @@ export default function Services() {
               required
             />
 
-            {/* ✅ File input */}
+            {/* File input */}
             <input
               type="file"
               name="serviceImage"
@@ -228,7 +228,7 @@ export default function Services() {
           )}
         </div>
 
-        {/* ✅ Service Cards */}
+        {/* Service Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service) => (
             <div
