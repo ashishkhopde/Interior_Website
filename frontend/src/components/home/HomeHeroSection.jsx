@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-import stars from '../assets/img/hero/star.png';
+import stars from '../../assets/img/hero/star.png';
 
 // Smooth fade-up animation variant
 const fadeUp = {

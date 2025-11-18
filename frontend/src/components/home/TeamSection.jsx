@@ -5,7 +5,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination, Autoplay } from "swiper/modules";
 
-import light from "../assets/img/light.png"; // adjust your import path if needed
+import light from "../../assets/img/light.png"; // adjust your import path if needed
 
 const fadeUp = {
   hidden: { opacity: 0, y: 50 },

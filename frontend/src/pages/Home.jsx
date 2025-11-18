@@ -1,8 +1,8 @@
 import React from 'react';
 import { motion } from "framer-motion";
+import { Link } from 'react-router-dom';
 
 
-import stars from '../assets/img/hero/star.png';
 import cushing from '../assets/img/cushion.png';
 import email from '../assets/img/email.svg';
 
@@ -11,12 +11,11 @@ import Footer from '../components/Footer';
 import BrandSection from '../components/BrandSection';
 import AchievementSection from '../components/AchievementSection';
 import AboutUsSection from '../components/AboutUsSection';
-import PortfolioSection from '../components/Portfolio';
+import PortfolioSection from '../components/home/Portfolio';
 import TestimonialSection from '../components/TestimonialSection';
-import TeamSection from '../components/TeamSection';
-import NewsSection from '../components/NewsSection';
-import HomeHeroSection from '../components/HomeHeroSection';
-import { Link } from 'react-router-dom';
+import TeamSection from '../components/home/TeamSection';
+import NewsSection from '../components/home/NewsSection';
+import HomeHeroSection from '../components/home/HomeHeroSection';
 
 const fadeUp = {
     hidden: { opacity: 0, y: 40 },
@@ -31,7 +30,7 @@ export default function Home() {
     return (
         <div className="ScrollSmoother-content">
             {/* Hero Section Start  */}
-            <HomeHeroSection/>
+            <HomeHeroSection />
 
             {/* About Section Start */}
             <AboutUsSection />
@@ -99,7 +98,7 @@ export default function Home() {
                                                         <a href="service-details.html">Architecture Plus</a>
                                                     </h3>
                                                     <p>This category focuses on the design and man</p>
-                                                    <Link to="/service-details" className="link-btn" onClick={()=>scrollTo(0,0)}>
+                                                    <Link to="/service-details" className="link-btn" onClick={() => scrollTo(0, 0)}>
                                                         Read More <i className="fas fa-long-arrow-right"></i>
                                                     </Link>
                                                 </div>
@@ -125,7 +124,7 @@ export default function Home() {
                                                         <a href="service-details.html">Urban Oasis</a>
                                                     </h3>
                                                     <p>This category focuses on the design and man</p>
-                                                    <Link to="/service-details" className="link-btn" onClick={()=>scrollTo(0,0)}>
+                                                    <Link to="/service-details" className="link-btn" onClick={() => scrollTo(0, 0)}>
                                                         Read More <i className="fas fa-long-arrow-right"></i>
                                                     </Link>
                                                 </div>
@@ -151,7 +150,7 @@ export default function Home() {
                                                         <a href="service-details.html">Blueprint Builders</a>
                                                     </h3>
                                                     <p>This category focuses on the design and man</p>
-                                                    <Link to="/service-details" className="link-btn" onClick={()=>scrollTo(0,0)}>
+                                                    <Link to="/service-details" className="link-btn" onClick={() => scrollTo(0, 0)}>
                                                         Read More <i className="fas fa-long-arrow-right"></i>
                                                     </Link>
                                                 </div>
@@ -557,7 +556,6 @@ export default function Home() {
                     </div>
                 </div>
             </motion.section>
-
             {/* Cta Banner Section Start */}
             <motion.section
                 className="cta-banner-section fix"
@@ -644,8 +642,8 @@ export default function Home() {
                                     custom={1.0}
                                 >
                                     <span>
-                                        <Link to="/Contact"  onClick={()=>scrollTo(0,0)}>
-                                        Subscribe Now <i className="far fa-arrow-right"></i>
+                                        <Link to="/Contact" onClick={() => scrollTo(0, 0)}>
+                                            Subscribe Now <i className="far fa-arrow-right"></i>
                                         </Link>
                                     </span>
                                 </motion.button>
@@ -781,7 +779,7 @@ export default function Home() {
             </motion.section>
 
             {/* News Section Start */}
-            <NewsSection/>
+            <NewsSection />
 
         </div>
     )
