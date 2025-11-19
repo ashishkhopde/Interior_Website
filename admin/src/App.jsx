@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation, Navigate } from "react-router-dom";
 
 import AdminNavbar from "./components/Navbar";
 import Dashboard from "./pages/Dashboard";
@@ -31,6 +31,9 @@ function AppContent() {
       {!hideNavbar && <AdminNavbar />}
 
       <Routes>
+        {/* Redirect root to /admin */}
+        <Route path="/" element={<Navigate to="/admin" replace />} />
+
         {/* Protected (only if token exists) */}
         <Route
           path="/admin"
