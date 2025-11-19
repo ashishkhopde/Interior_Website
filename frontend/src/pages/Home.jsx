@@ -14,7 +14,7 @@ import AboutUsSection from '../components/AboutUsSection';
 import PortfolioSection from '../components/home/Portfolio';
 import TestimonialSection from '../components/TestimonialSection';
 import TeamSection from '../components/home/TeamSection';
-import NewsSection from "../components/Home/NewsSection";
+import NewsSection from "../components/home/NewsSection";
 import HomeHeroSection from '../components/home/HomeHeroSection';
 
 const fadeUp = {
