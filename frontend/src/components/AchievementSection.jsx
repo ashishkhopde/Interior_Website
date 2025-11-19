@@ -59,10 +59,7 @@ export default function AchievementSection() {
                   viewport={{ once: true }}
                   custom={0.6}
                 >
-                  Lorem ipsum dolor sit amet consectetur adipiscing elit torquent
-                  nu nascetu cubilia tempor lacus natoque quis auctor mattis luctus
-                  varius pretium aptent urna iaculis suspendisse eros egestas mollis
-                  dis nisl commodo.
+                 We have consistently delivered exceptional designs that exceed client expectations. Our work has helped brands enhance their identity and create lasting impressions. With each project, we push creativity further to achieve award-worthy results.
                 </motion.p>
 
                 <motion.div
@@ -74,7 +71,7 @@ export default function AchievementSection() {
                   viewport={{ once: true }}
                   custom={0.8}
                 >
-                  <Link to="/about" className="theme-btn bg-transparent" onClick={()=>scrollTo(0,0)}>
+                  <Link to="/about" className="theme-btn bg-transparent" onClick={() => scrollTo(0, 0)}>
                     Read More <i className="fas fa-long-arrow-right"></i>
                   </Link>
                 </motion.div>

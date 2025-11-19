@@ -15,7 +15,7 @@ const fadeUp = {
 
 export default function HomeHeroSection() {
   return (
-    <section className="hero-section hero-1">
+    <section className="hero-section hero-1 ">
       {/* Star Shape */}
       <div className="star-image">
         <img src={stars} alt="shape-img" />
@@ -23,7 +23,7 @@ export default function HomeHeroSection() {
 
       {/* Floating Side Image */}
       <motion.div
-        className="hero-image-2 wow fadeInUp"
+        className="hero-image-2 wow fadeInUp mt-10.5"
         data-wow-delay=".4s"
         variants={fadeUp}
         initial="hidden"
@@ -66,9 +66,7 @@ export default function HomeHeroSection() {
                 viewport={{ once: true, amount: 0.2 }}
                 custom={0.3}
               >
-                Lorem ipsum dolor sit amet natoqu <br />
-                consectetur adipiscing elit torquent <br />
-                nu nascetu cubilia tempor lacus
+                We are a group of architects, designers, engineers brand planners working together to build a better future. Our philosophy is base on a deep appreciation for the natural world
               </motion.p>
             </div>
           </div>

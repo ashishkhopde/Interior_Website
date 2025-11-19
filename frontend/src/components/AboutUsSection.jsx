@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import founder from "../assets/img/founder.jpeg";
 
 const fadeUp = {
     hidden: { opacity: 0, y: 40 },
@@ -85,13 +86,13 @@ export default function AboutUsSection() {
                                                     className="clinet-img bg-cover"
                                                     style={{
                                                         backgroundImage:
-                                                            "url('https://modinatheme.com/oraxis/wp-content/uploads/2024/10/clinet.png')",
+                                                            `url(${founder})`,
                                                     }}
                                                 ></div>
 
                                                 <div className="content">
-                                                    <h4>Alex Jones</h4>
-                                                    <p>Security boy</p>
+                                                    <h4>Nikhar Sharma</h4>
+                                                    <p>Founder</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -137,7 +138,7 @@ export default function AboutUsSection() {
                                     viewport={{ once: true }}
                                     custom={0.5}
                                 >
-                                 Architecture and interior company must be doing some incredible work—shaping spaces that are both functional and visually stunning! Whether you're designing structures or crafting interiors, your expertise likely combines creativity.
+                                    Architecture and interior company must be doing some incredible work—shaping spaces that are both functional and visually stunning! Whether you're designing structures or crafting interiors, your expertise likely combines creativity.
                                 </motion.p>
 
                                 <motion.p
@@ -149,9 +150,7 @@ export default function AboutUsSection() {
                                     viewport={{ once: true }}
                                     custom={0.7}
                                 >
-                                    Lorem ipsum dolor sit amet consectetur adipiscing elit torquent
-                                    nu nascetu cubilia tempor lacus natoque quis auctor mattis
-                                    luctus varius
+                                    Carefully crafted to suit any interior design website. Certainly, N Weaver will help you to build an out sanding period.
                                 </motion.p>
 
                                 <motion.div
@@ -163,7 +162,7 @@ export default function AboutUsSection() {
                                     viewport={{ once: true }}
                                     custom={0.9}
                                 >
-                                    <Link to="/about" className="theme-btn" onClick={()=>scrollTo(0,0)}>
+                                    <Link to="/about" className="theme-btn" onClick={() => scrollTo(0, 0)}>
                                         Read More
                                         <i className="fas fa-long-arrow-right"></i>
                                     </Link>

@@ -33,7 +33,7 @@ function AppContent() {
       <Routes>
         {/* Protected (only if token exists) */}
         <Route
-          path="/"
+          path="/admin"
           element={
             <PrivateRoute>
               <Dashboard />
@@ -41,7 +41,7 @@ function AppContent() {
           }
         />
         <Route
-          path="/message"
+          path="/admin/message"
           element={
             <PrivateRoute>
               <Message />
@@ -49,7 +49,7 @@ function AppContent() {
           }
         />
         <Route
-          path="/projects"
+          path="/admin/projects"
           element={
             <PrivateRoute>
               <Projects />
@@ -57,7 +57,7 @@ function AppContent() {
           }
         />
         <Route
-          path="/blog"
+          path="/admin/blog"
           element={
             <PrivateRoute>
               <Blog />
@@ -65,7 +65,7 @@ function AppContent() {
           }
         />
         <Route
-          path="/services"
+          path="/admin/services"
           element={
             <PrivateRoute>
               <Services />

@@ -115,11 +115,11 @@ export default function TestimonialSection() {
                             className="client-image bg-cover"
                             style={{
                               backgroundImage:
-                                "url('https://modinatheme.com/oraxis/wp-content/uploads/2024/10/01-1.png')",
+                                "url('https://i.pinimg.com/736x/dc/22/55/dc225587b5e11e930bac100e99dc6ba3.jpg')",
                             }}
                           ></div>
                           <div className="client-content">
-                            <h3>Michael Ramirez</h3>
+                            <h3>Sandeep Sharma</h3>
                             <span>Marketing Manager</span>
                           </div>
                         </div>
@@ -129,13 +129,12 @@ export default function TestimonialSection() {
                           <i className="fas fa-star"></i>
                           <i className="fas fa-star"></i>
                           <i className="fas fa-star"></i>
-                          <i className="fas fa-star text-color"></i>
+                          <i className="fas fa-star"></i>
+                          {/* <i className="fas fa-star text-color"></i> */}
                         </div>
 
                         <p>
-                          I recently attended their workshop, a transformative
-                          experience. The content was engaging, the presenters
-                          were knowledgeable and passionate.
+                          This architectural firm delivered innovation beyond what we imagined. The structure not only stands as a masterpiece but also embodies sustainability, efficiency, and timeless beauty.
                         </p>
                       </div>
                     </div>
@@ -152,11 +151,11 @@ export default function TestimonialSection() {
                             className="client-image bg-cover"
                             style={{
                               backgroundImage:
-                                "url('assets/img/testimonial/01.png')",
+                                "url('https://media.craiyon.com/2025-04-19/BzZvokeAT8eOiBp91pa6JA.webp')",
                             }}
                           ></div>
                           <div className="client-content">
-                            <h3>Lucas Hudson</h3>
+                            <h3>Kanak Thakur</h3>
                             <span>Marketing Manager</span>
                           </div>
                         </div>
@@ -170,9 +169,79 @@ export default function TestimonialSection() {
                         </div>
 
                         <p>
-                          I recently attended their workshop, a transformative
-                          experience. The content was engaging, the presenters
-                          were knowledgeable and passionate.
+                          The transformation of our home was done much more than we had expected. From lighting to furniture arrangement, every little thing was curated to perfection. We are extremely happy.
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Slide 3 */}
+                    <div className="swiper-slide">
+                      <div className="testimonial-items">
+                        <div className="icon">
+                          <i className="fal fa-quote-right"></i>
+                        </div>
+
+                        <div className="client-items">
+                          <div
+                            className="client-image bg-cover"
+                            style={{
+                              backgroundImage:
+                                "url('https://www.shutterstock.com/image-photo/confident-young-indian-woman-holding-260nw-1443108653.jpg')",
+                            }}
+                          ></div>
+                          <div className="client-content">
+                            <h3>Aastha Joshi</h3>
+                            <span>Marketing Manager</span>
+                          </div>
+                        </div>
+
+                        <div className="star">
+                          <i className="fas fa-star"></i>
+                          <i className="fas fa-star"></i>
+                          <i className="fas fa-star"></i>
+                          <i className="fas fa-star"></i>
+                          <i className="fas fa-star"></i>
+                          {/* <i className="fas fa-star text-color"></i> */}
+                        </div>
+
+                        <p>
+                          I never imagined how much a well-thought-out interior could enhance my daily routine. The blend of aesthetics and practicality made my home feel both stylish and functional.
+                        </p>
+                      </div>
+                    </div>
+                    
+                    {/* Slide 4 */}
+                    <div className="swiper-slide">
+                      <div className="testimonial-items">
+                        <div className="icon">
+                          <i className="fal fa-quote-right"></i>
+                        </div>
+
+                        <div className="client-items">
+                          <div
+                            className="client-image bg-cover"
+                            style={{
+                              backgroundImage:
+                                "url('https://www.shutterstock.com/image-photo/handsome-smiling-young-man-portrait-260nw-2067491888.jpg')",
+                            }}
+                          ></div>
+                          <div className="client-content">
+                            <h3>Ankesh Singh</h3>
+                            <span>Marketing Manager</span>
+                          </div>
+                        </div>
+
+                        <div className="star">
+                          <i className="fas fa-star"></i>
+                          <i className="fas fa-star"></i>
+                          <i className="fas fa-star"></i>
+                          <i className="fas fa-star"></i>
+                          <i className="fas fa-star"></i>
+                          {/* <i className="fas fa-star text-color"></i> */}
+                        </div>
+
+                        <p>
+                          I never imagined how much a well-thought-out interior could enhance my daily routine. The blend of aesthetics and practicality made my home feel both stylish and functional.
                         </p>
                       </div>
                     </div>

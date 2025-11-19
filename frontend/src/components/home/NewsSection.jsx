@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Swiper from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation, Autoplay } from "swiper/modules";
 import { Link } from "react-router-dom";
+import axios from "axios"; // ✅ For API requests
 
 const fadeUp = {
   hidden: { opacity: 0, y: 50 },
@@ -16,28 +17,49 @@ const fadeUp = {
 };
 
 export default function NewsSection() {
+  const [blogs, setBlogs] = useState([]);
+
+  // ✅ Fetch blog data from backend
   useEffect(() => {
-    new Swiper(".news-slider", {
-      modules: [Navigation, Autoplay],
-      slidesPerView: 3,
-      spaceBetween: 30,
-      loop: true, // 🔁 Infinite loop
-      speed: 1000,
-      autoplay: {
-        delay: 3000,
-        disableOnInteraction: false,
-      },
-      navigation: {
-        nextEl: ".array-next",
-        prevEl: ".array-prev",
-      },
-      breakpoints: {
-        0: { slidesPerView: 1 },
-        768: { slidesPerView: 2 },
-        1200: { slidesPerView: 3 },
-      },
-    });
+    const fetchBlogs = async () => {
+      try {
+        const base = import.meta.env.VITE_BASE_URL;
+        const response = await axios.get(`${base}/blog`);
+        // console.log("Fetched blogs:", response.data);
+        setBlogs(response.data.blogs); 
+      } catch (error) {
+        console.error("Error fetching blogs:", error);
+      }
+    };
+
+    fetchBlogs();
   }, []);
+
+  // ✅ Initialize Swiper AFTER blogs are loaded
+  useEffect(() => {
+    if (blogs.length > 0) {
+      new Swiper(".news-slider", {
+        modules: [Navigation, Autoplay],
+        slidesPerView: 3,
+        spaceBetween: 30,
+        loop: true,
+        speed: 1000,
+        autoplay: {
+          delay: 3000,
+          disableOnInteraction: false,
+        },
+        navigation: {
+          nextEl: ".array-next",
+          prevEl: ".array-prev",
+        },
+        breakpoints: {
+          0: { slidesPerView: 1 },
+          768: { slidesPerView: 2 },
+          1200: { slidesPerView: 3 },
+        },
+      });
+    }
+  }, [blogs]);
 
   return (
     <motion.section
@@ -60,7 +82,7 @@ export default function NewsSection() {
           <div className="section-title text-left">
             <h6 className="wow fadeInUp">Latest blog and news</h6>
             <h2 className="splt-txt wow" data-splitting="true">
-              Crafting spaces that the <br /> reflect your style
+              Crafting spaces that <br /> reflect your style
             </h2>
           </div>
 
@@ -92,147 +114,51 @@ export default function NewsSection() {
           custom={0.5}
         >
           <div className="swiper-wrapper">
-            {/* Slide 1 */}
-            <div className="swiper-slide">
-              <div className="news-card-items">
-                <div
-                  className="news-image bg-cover"
-                  style={{
-                    backgroundImage: "url('https://modinatheme.com/oraxis/wp-content/uploads/2024/10/07-2.jpg')",
-                  }}
-                ></div>
+            {blogs.length > 0 ? (
+              blogs.map((blog, index) => (
+                <div className="swiper-slide" key={blog._id || index}>
+                  <div className="news-card-items">
+                    <div
+                      className="news-image bg-cover"
+                      style={{
+                        backgroundImage: `url(${blog.image})`,
+                      }}
+                    ></div>
 
-                <div className="news-content">
-                  <ul>
-                    <li>
-                      <i className="fas fa-calendar-alt"></i>
-                      October 19, 2024
-                    </li>
-                    <li>
-                      <i className="far fa-user"></i>
-                      By admin
-                    </li>
-                  </ul>
+                    <div className="news-content">
+                      <ul>
+                        <li>
+                          <i className="fas fa-calendar-alt"></i>
+                          {new Date(blog.createdAt).toLocaleDateString()}
+                        </li>
+                        <li>
+                          <i className="far fa-user"></i>
+                          {blog.author || "Admin"}
+                        </li>
+                      </ul>
 
-                  <h3>
-                    <a href="news-details.html">
-                      Redefining the concept of living
-                    </a>
-                  </h3>
+                      <h3>
+                        <Link to={`/blog-details/${blog._id}`}>
+                          {blog.title}
+                        </Link>
+                      </h3>
 
-                  <Link to="/project-details" className="link-btn" onClick={()=>scrollTo(0,0)}>
-                    Read More <i className="fas fa-long-arrow-right"></i>
-                  </Link>
+                      <p className="line-clamp-2">{blog.description}</p>
+
+                      <Link
+                        to={`/blog-details/${blog._id}`}
+                        className="link-btn"
+                        onClick={() => scrollTo(0, 0)}
+                      >
+                        Read More <i className="fas fa-long-arrow-right"></i>
+                      </Link>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-
-            {/* Slide 2 */}
-            <div className="swiper-slide">
-              <div className="news-card-items">
-                <div
-                  className="news-image bg-cover"
-                  style={{
-                    backgroundImage: "url('https://modinatheme.com/oraxis/wp-content/uploads/2024/10/08-1.jpg')",
-                  }}
-                ></div>
-
-                <div className="news-content">
-                  <ul>
-                    <li>
-                      <i className="fas fa-calendar-alt"></i>
-                      October 19, 2024
-                    </li>
-                    <li>
-                      <i className="far fa-user"></i>
-                      By admin
-                    </li>
-                  </ul>
-
-                  <h3>
-                    <a href="news-details.html">
-                      Crafting spaces that the reflect your style
-                    </a>
-                  </h3>
-
-                  <Link to="/project-details" className="link-btn" onClick={()=>scrollTo(0,0)}>
-                    Read More <i className="fas fa-long-arrow-right"></i>
-                  </Link>
-                </div>
-              </div>
-            </div>
-
-
-                        {/* Slide 3 */}
-            <div className="swiper-slide">
-              <div className="news-card-items">
-                <div
-                  className="news-image bg-cover"
-                  style={{
-                    backgroundImage: "url('https://modinatheme.com/oraxis/wp-content/uploads/2024/10/08-1.jpg')",
-                  }}
-                ></div>
-
-                <div className="news-content">
-                  <ul>
-                    <li>
-                      <i className="fas fa-calendar-alt"></i>
-                      October 19, 2024
-                    </li>
-                    <li>
-                      <i className="far fa-user"></i>
-                      By admin
-                    </li>
-                  </ul>
-
-                  <h3>
-                    <a href="news-details.html">
-                      Crafting spaces that the reflect your style
-                    </a>
-                  </h3>
-
-                  <Link to="/project-details" className="link-btn" onClick={()=>scrollTo(0,0)}>
-                    Read More <i className="fas fa-long-arrow-right"></i>
-                  </Link>
-                </div>
-              </div>
-            </div>
-
-
-            {/* Slide 4 */}
-            <div className="swiper-slide">
-              <div className="news-card-items">
-                <div
-                  className="news-image bg-cover"
-                  style={{
-                    backgroundImage: "url('https://modinatheme.com/oraxis/wp-content/uploads/2024/10/07-2.jpg')",
-                  }}
-                ></div>
-
-                <div className="news-content">
-                  <ul>
-                    <li>
-                      <i className="fas fa-calendar-alt"></i>
-                      October 19, 2024
-                    </li>
-                    <li>
-                      <i className="far fa-user"></i>
-                      By admin
-                    </li>
-                  </ul>
-
-                  <h3>
-                    <a href="news-details.html">
-                      Unleash the potential of your space
-                    </a>
-                  </h3>
-
-                  <Link to="/project-details" className="link-btn" onClick={()=>scrollTo(0,0)}>
-                    Read More <i className="fas fa-long-arrow-right"></i>
-                  </Link>
-                </div>
-              </div>
-            </div>
+              ))
+            ) : (
+              <p className="text-center py-5 w-full">Loading blogs...</p>
+            )}
           </div>
         </motion.div>
       </div>

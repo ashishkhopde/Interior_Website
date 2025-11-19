@@ -5,7 +5,12 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination, Autoplay } from "swiper/modules";
 
-import light from "../../assets/img/light.png"; // adjust your import path if needed
+
+import light from "../../assets/img/light.png"; 
+import one from "../../assets/img/team/1.jpeg"; 
+import two from "../../assets/img/team/2.jpeg"; 
+import three from "../../assets/img/team/3.jpeg"; 
+import four from "../../assets/img/team/4.jpeg"; 
 
 const fadeUp = {
   hidden: { opacity: 0, y: 50 },
@@ -82,7 +87,7 @@ export default function TeamSection() {
                 <div
                   className="team-image bg-cover"
                   style={{
-                    backgroundImage: "url('https://modinatheme.com/oraxis/wp-content/uploads/2024/10/01-8.jpg')",
+                    backgroundImage: `url(${one})`,
                   }}
                 >
                   <div className="team-content">
@@ -129,7 +134,7 @@ export default function TeamSection() {
                 <div
                   className="team-image bg-cover"
                   style={{
-                    backgroundImage: "url('https://modinatheme.com/oraxis/wp-content/uploads/2024/10/03-7.jpg')",
+                    backgroundImage: `url(${two})`,
                   }}
                 >
                   <div className="team-content">
@@ -176,7 +181,7 @@ export default function TeamSection() {
                 <div
                   className="team-image bg-cover"
                   style={{
-                    backgroundImage: "url('https://modinatheme.com/oraxis/wp-content/uploads/2024/10/03-7.jpg')",
+                    backgroundImage: `url(${three})`,
                   }}
                 >
                   <div className="team-content">
@@ -223,7 +228,7 @@ export default function TeamSection() {
                 <div
                   className="team-image bg-cover"
                   style={{
-                    backgroundImage: "url(https://modinatheme.com/oraxis/wp-content/uploads/2024/10/02-7.jpg)",
+                    backgroundImage: `url(${four})`,
                   }}
                 >
                   <div className="team-content">

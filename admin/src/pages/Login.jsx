@@ -19,7 +19,7 @@ export default function AdminLogin() {
       const res = await api.post("/admin/login", formData);
       localStorage.setItem("token", res.data.token);
       setStatus("Login successful!");
-      navigate("/");
+      navigate("/admin");
     } catch (err) {
       setStatus(err.response?.data?.message || "Invalid credentials");
     }

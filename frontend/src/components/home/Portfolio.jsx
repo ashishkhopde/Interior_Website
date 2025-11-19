@@ -1,43 +1,64 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import Swiper from "swiper";
+import { Swiper as SwiperCore } from "swiper";
+import { Navigation, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
-import { Navigation, Autoplay } from "swiper/modules";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 50 },
   visible: (delay = 0) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 1.5, ease: "easeOut", delay },
+    transition: { duration: 1.3, ease: "easeOut", delay },
   }),
 };
 
 export default function PortfolioSection() {
+  const [projects, setProjects] = useState([]);
+
+  // ✅ Fetch Projects from API
   useEffect(() => {
-    new Swiper(".portfolio-slider", {
-      modules: [Navigation, Autoplay],
-      slidesPerView: 3,
-      spaceBetween: 30,
-      loop: true,
-      speed: 1000,
-      autoplay: {
-        delay: 2500,
-        disableOnInteraction: false,
-      },
-      navigation: {
-        nextEl: ".array-next",
-        prevEl: ".array-prev",
-      },
-      breakpoints: {
-        0: { slidesPerView: 1 },
-        768: { slidesPerView: 2 },
-        1200: { slidesPerView: 3 },
-      },
-    });
+    const fetchProjects = async () => {
+      try {
+        const base = import.meta.env.VITE_BASE_URL; 
+        const res = await axios.get(`${base}/project`);
+        setProjects(res.data.project);
+      } catch (error) {
+        console.error("Error fetching projects:", error);
+      }
+    };
+
+    fetchProjects();
   }, []);
+
+  // ✅ Initialize Swiper after projects load
+  useEffect(() => {
+    if (projects.length > 0) {
+      new SwiperCore(".portfolio-slider", {
+        modules: [Navigation, Autoplay],
+        slidesPerView: 3,
+        spaceBetween: 30,
+        loop: true,
+        speed: 1000,
+        autoplay: {
+          delay: 2500,
+          disableOnInteraction: false,
+        },
+        navigation: {
+          nextEl: ".array-next",
+          prevEl: ".array-prev",
+        },
+        breakpoints: {
+          0: { slidesPerView: 1 },
+          768: { slidesPerView: 2 },
+          1200: { slidesPerView: 3 },
+        },
+      });
+    }
+  }, [projects]);
 
   return (
     <motion.section
@@ -58,7 +79,7 @@ export default function PortfolioSection() {
           custom={0.2}
         >
           <div className="section-title">
-            <h6 className="wow fadeInUp">Latest Portfolio</h6>
+            <h6 className="wow fadeInUp">Latest Projects</h6>
             <h2 className="splt-txt wow" data-splitting="true">
               Transforming houses <br /> into homes
             </h2>
@@ -82,7 +103,7 @@ export default function PortfolioSection() {
           </motion.div>
         </motion.div>
 
-        {/* Slider */}
+        {/* Swiper Slider */}
         <motion.div
           className="portfolio-wrapper"
           variants={fadeUp}
@@ -93,109 +114,40 @@ export default function PortfolioSection() {
         >
           <div className="swiper portfolio-slider">
             <div className="swiper-wrapper">
-              {/* Slide 1 */}
-              <div className="swiper-slide">
-                <div className="portfolio-items">
-                  <div
-                    className="portfolio-image bg-cover"
-                    style={{
-                      backgroundImage:
-                        "url('https://modinatheme.com/oraxis/wp-content/uploads/2024/10/01-3.jpg')",
-                    }}
-                  >
-                    <div className="portfolio-content">
-                      <Link to ="/project-details" className="icon" onClick={()=>scrollTo(0,0)}>
-                        <i className="fas fa-long-arrow-right" ></i>
-                      </Link>
-                      <h3>
-                        <a href="project-details.html">Interior Perfection</a>
-                      </h3>
-                      <p>
-                        This category focuses on the design and <br />
-                        construction of buildings
-                      </p>
+              {projects.length > 0 ? (
+                projects.map((project, index) => (
+                  <div className="swiper-slide" key={project._id || index}>
+                    <div className="portfolio-items">
+                      <div
+                        className="portfolio-image bg-cover"
+                        style={{
+                          backgroundImage: `url(${project.image})`,
+                        }}
+                      >
+                        <div className="portfolio-content">
+                          <Link
+                            to={`/project-details/${project._id}`}
+                            className="icon"
+                            onClick={() => scrollTo(0, 0)}
+                          >
+                            <i className="fas fa-long-arrow-right"></i>
+                          </Link>
+                          <h3>
+                            <Link to={`/project-details/${project._id}`}>
+                              {project.projectTitle || "Untitled Project"}
+                            </Link>
+                          </h3>
+                          <p className="line-clamp-2">
+                            {project.description?.slice(0, 100) || ""}
+                          </p>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
-
-              {/* Slide 2 */}
-              <div className="swiper-slide">
-                <div className="portfolio-items">
-                  <div
-                    className="portfolio-image bg-cover"
-                    style={{
-                      backgroundImage:
-                        "url('https://modinatheme.com/oraxis/wp-content/uploads/2024/10/02-3.jpg')",
-                    }}
-                  >
-                    <div className="portfolio-content">
-                      <Link to ="/project-details" className="icon" onClick={()=>scrollTo(0,0)}>
-                        <i className="fas fa-long-arrow-right" ></i>
-                      </Link>
-                      <h3>
-                        <a href="project-details.html">Interior Perfection</a>
-                      </h3>
-                      <p>
-                        This category focuses on the design and <br />
-                        construction of buildings
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Slide 3 */}
-              <div className="swiper-slide">
-                <div className="portfolio-items">
-                  <div
-                    className="portfolio-image bg-cover"
-                    style={{
-                      backgroundImage:
-                        "url('https://modinatheme.com/oraxis/wp-content/uploads/2024/10/03-3.jpg')",
-                    }}
-                  >
-                    <div className="portfolio-content">
-                      <Link to ="/project-details" className="icon" onClick={()=>scrollTo(0,0)}>
-                        <i className="fas fa-long-arrow-right" ></i>
-                      </Link>
-                      <h3>
-                        <a href="project-details.html">Interior Perfection</a>
-                      </h3>
-                      <p>
-                        This category focuses on the design and <br />
-                        construction of buildings
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Slide 4 */}
-              <div className="swiper-slide">
-                <div className="portfolio-items">
-                  <div
-                    className="portfolio-image bg-cover"
-                    style={{
-                      backgroundImage:
-                        "url('https://modinatheme.com/oraxis/wp-content/uploads/2024/10/04-3.jpg')",
-                    }}
-                  >
-                    <div className="portfolio-content">
-                      <Link to ="/project-details" className="icon" onClick={()=>scrollTo(0,0)}>
-                        <i className="fas fa-long-arrow-right" ></i>
-                      </Link>
-                      <h3>
-                        <a href="project-details.html">Interior Perfection</a>
-                      </h3>
-                      <p>
-                        This category focuses on the design and <br />
-                        construction of buildings
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                ))
+              ) : (
+                <p className="text-center w-full py-5">Loading projects...</p>
+              )}
             </div>
           </div>
         </motion.div>

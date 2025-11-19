@@ -14,7 +14,7 @@ import AboutUsSection from '../components/AboutUsSection';
 import PortfolioSection from '../components/home/Portfolio';
 import TestimonialSection from '../components/TestimonialSection';
 import TeamSection from '../components/home/TeamSection';
-import NewsSection from '../components/home/NewsSection';
+import NewsSection from "../components/Home/NewsSection";
 import HomeHeroSection from '../components/home/HomeHeroSection';
 
 const fadeUp = {
@@ -44,18 +44,19 @@ export default function Home() {
                     <img
                         src="https://modinatheme.com/oraxis/wp-content/uploads/2024/10/bg-shape.jpg"
                         alt="shape"
+                        className="w-full h-auto object-cover"
                     />
                 </div>
 
                 <div className="container">
                     <div className="service-wrapper">
-                        <div className="row g-4">
+                        <div className="row g-4 items-center">
                             {/* Left Side */}
                             <div className="col-xl-9 col-lg-12">
                                 <div className="service-left">
-                                    <div className="section-title">
+                                    <div className="section-title mb-4">
                                         <motion.h6
-                                            className="wow fadeInUp"
+                                            className="wow fadeInUp text-sm md:text-base"
                                             variants={fadeUp}
                                             initial="hidden"
                                             whileInView="visible"
@@ -66,7 +67,7 @@ export default function Home() {
                                         </motion.h6>
 
                                         <motion.h2
-                                            className="splt-txt wow"
+                                            className="splt-txt wow text-3xl md:text-4xl lg:text-5xl font-bold leading-snug"
                                             data-splitting="true"
                                             variants={fadeUp}
                                             initial="hidden"
@@ -74,7 +75,7 @@ export default function Home() {
                                             viewport={{ once: true }}
                                             custom={0.4}
                                         >
-                                            Creating spaces the that <br /> inspire
+                                            Creating spaces that <br /> inspire
                                         </motion.h2>
                                     </div>
 
@@ -89,17 +90,26 @@ export default function Home() {
                                             viewport={{ once: true }}
                                             custom={0.3}
                                         >
-                                            <div className="service-items mt-4">
-                                                <div className="icon">
+                                            <div className="service-items p-4 md:p-5 h-full flex flex-col justify-between">
+                                                <div className="icon text-3xl md:text-4xl mb-3">
                                                     <i className="flaticon-bed-1"></i>
                                                 </div>
                                                 <div className="content">
-                                                    <h3 className="splt-txt wow" data-splitting="true">
-                                                        <a href="service-details.html">Architecture Plus</a>
+                                                    <h3 className="text-lg md:text-xl font-semibold mb-2">
+                                                        <Link to="/service-details">Interior Design</Link>
                                                     </h3>
-                                                    <p>This category focuses on the design and man</p>
-                                                    <Link to="/service-details" className="link-btn" onClick={() => scrollTo(0, 0)}>
-                                                        Read More <i className="fas fa-long-arrow-right"></i>
+                                                    <p className="text-sm md:text-base mb-3 leading-relaxed">
+                                                        Interior design is the art and science of enhancing spaces
+                                                        to create functional, aesthetically pleasing environments.
+                                                        It goes beyond just decoration—it involves spatial
+                                                        planning, color psychology.
+                                                    </p>
+                                                    <Link
+                                                        to="/service-details"
+                                                        className="link-btn text-sm md:text-base"
+                                                        onClick={() => scrollTo(0, 0)}
+                                                    >
+                                                        Read More <i className="fas fa-long-arrow-right ml-1"></i>
                                                     </Link>
                                                 </div>
                                             </div>
@@ -115,17 +125,26 @@ export default function Home() {
                                             viewport={{ once: true }}
                                             custom={0.5}
                                         >
-                                            <div className="service-items">
-                                                <div className="icon">
+                                            <div className="service-items p-4 md:p-5 h-full flex flex-col justify-between">
+                                                <div className="icon text-3xl md:text-4xl mb-3">
                                                     <i className="flaticon-floor-plan-1"></i>
                                                 </div>
                                                 <div className="content">
-                                                    <h3 className="splt-txt wow" data-splitting="true">
-                                                        <a href="service-details.html">Urban Oasis</a>
+                                                    <h3 className="text-lg md:text-xl font-semibold mb-2">
+                                                        <Link to="/service-details">Landscape Architecture</Link>
                                                     </h3>
-                                                    <p>This category focuses on the design and man</p>
-                                                    <Link to="/service-details" className="link-btn" onClick={() => scrollTo(0, 0)}>
-                                                        Read More <i className="fas fa-long-arrow-right"></i>
+                                                    <p className="text-sm md:text-base mb-3 leading-relaxed">
+                                                        Landscape architecture is where nature meets design,
+                                                        shaping outdoor spaces that are both functional and
+                                                        visually stunning. It goes beyond planting trees and
+                                                        flowers—it involves creating environments.
+                                                    </p>
+                                                    <Link
+                                                        to="/service-details"
+                                                        className="link-btn text-sm md:text-base"
+                                                        onClick={() => scrollTo(0, 0)}
+                                                    >
+                                                        Read More <i className="fas fa-long-arrow-right ml-1"></i>
                                                     </Link>
                                                 </div>
                                             </div>
@@ -141,17 +160,26 @@ export default function Home() {
                                             viewport={{ once: true }}
                                             custom={0.7}
                                         >
-                                            <div className="service-items mt-4">
-                                                <div className="icon">
+                                            <div className="service-items p-4 md:p-5 h-full flex flex-col justify-between">
+                                                <div className="icon text-3xl md:text-4xl mb-3">
                                                     <i className="flaticon-balcony"></i>
                                                 </div>
                                                 <div className="content">
-                                                    <h3 className="splt-txt wow" data-splitting="true">
-                                                        <a href="service-details.html">Blueprint Builders</a>
+                                                    <h3 className="text-lg md:text-xl font-semibold mb-2">
+                                                        <Link to="/service-details">Construction Design</Link>
                                                     </h3>
-                                                    <p>This category focuses on the design and man</p>
-                                                    <Link to="/service-details" className="link-btn" onClick={() => scrollTo(0, 0)}>
-                                                        Read More <i className="fas fa-long-arrow-right"></i>
+                                                    <p className="text-sm md:text-base mb-3 leading-relaxed">
+                                                        Construction design is about translating architectural
+                                                        concepts into functional, buildable structures. It covers
+                                                        everything from site planning to material selection and
+                                                        sustainability.
+                                                    </p>
+                                                    <Link
+                                                        to="/service-details"
+                                                        className="link-btn text-sm md:text-base"
+                                                        onClick={() => scrollTo(0, 0)}
+                                                    >
+                                                        Read More <i className="fas fa-long-arrow-right ml-1"></i>
                                                     </Link>
                                                 </div>
                                             </div>
@@ -171,7 +199,7 @@ export default function Home() {
                                 custom={0.9}
                             >
                                 <div
-                                    className="service-image bg-cover"
+                                    className="service-image bg-cover rounded-2xl h-[350px] md:h-[450px] lg:h-[100%] w-full"
                                     style={{
                                         backgroundImage:
                                             "url('https://modinatheme.com/oraxis/wp-content/uploads/2024/10/01-6.jpg')",
@@ -182,6 +210,7 @@ export default function Home() {
                     </div>
                 </div>
             </section>
+
 
             {/* Work Process Section Start */}
             <section className="work-process section-padding">
@@ -360,9 +389,7 @@ export default function Home() {
                                         viewport={{ once: true }}
                                         custom={0.5}
                                     >
-                                        Aliquam eros justo, posuere loborti laorematullamcorper the posuer viverra
-                                        Aliquam eroo, posuere loborti Aliquam eros justo, posu laorematullamcorper
-                                        the a posuer viverra .Aliquam
+                                        Hvillas is a very modern and creative template that has been carefully crafted to suit any interior design website. Certainly, Hvillas will help you to build an out sanding period.
                                     </motion.p>
 
                                     <motion.div
@@ -388,8 +415,7 @@ export default function Home() {
                                         </div>
 
                                         <p>
-                                            Lorem Ipsum is simply dummy text of the a <br />
-                                            printing and typesetting industry.
+                                            Successfully completed a wide range of creative and client-focused projects, each delivered with precision and excellence.
                                         </p>
                                     </motion.div>
                                 </div>
@@ -556,6 +582,7 @@ export default function Home() {
                     </div>
                 </div>
             </motion.section>
+
             {/* Cta Banner Section Start */}
             <motion.section
                 className="cta-banner-section fix"
@@ -695,10 +722,10 @@ export default function Home() {
                                 </div>
                                 <div className="pricing-content">
                                     <h3 className="splt-txt wow" data-splitting>
-                                        <a href="shop-details.html">AesthetiCore</a>
+                                        <Link to="services" onClick={()=>scrollTo(0,0)}>AesthetiCore</Link>
                                     </h3>
-                                    <p>Lorem Ipsum is simply the dummy man</p>
-                                    <h4>$25.00</h4>
+                                    <p>Interior Design, Custom design concept, Floor plan and elevations, Ideal for refreshing a single room or space</p>
+                                    <Link to="services" onClick={()=>scrollTo(0,0)}><h4>$25.00</h4></Link>
                                 </div>
                             </div>
                         </motion.div>
@@ -719,10 +746,10 @@ export default function Home() {
                                 </div>
                                 <div className="pricing-content">
                                     <h3 className="splt-txt wow" data-splitting>
-                                        <a href="shop-details.html">Luxe Living</a>
+                                        <Link to="/services" onClick={()=>scrollTo(0,0)}>Luxe Living</Link>
                                     </h3>
-                                    <p>Lorem Ipsum is simply the dummy man</p>
-                                    <h4>$45.00</h4>
+                                    <p>Architectural Design, Project Management, Full project management services, Co-ordination with contractors</p>
+                                    <Link to="/services" onClick={()=>scrollTo(0,0)}><h4>$45.00</h4></Link>
                                 </div>
                             </div>
                         </motion.div>
@@ -743,10 +770,10 @@ export default function Home() {
                                 </div>
                                 <div className="pricing-content">
                                     <h3 className="splt-txt wow" data-splitting>
-                                        <a href="shop-details.html">Artful Interiors</a>
+                                        <Link to="/services" onClick={()=>scrollTo(0,0)}>Artful Interiors</Link>
                                     </h3>
-                                    <p>Lorem Ipsum is simply the dummy man</p>
-                                    <h4>$30.00</h4>
+                                    <p>End-to-End Design Execution & Quality Assurance, Material Selection & Interior Styling Guidance.</p>
+                                    <Link to="/services" onClick={()=>scrollTo(0,0)}><h4>$30.00</h4></Link>
                                 </div>
                             </div>
                         </motion.div>
@@ -767,10 +794,10 @@ export default function Home() {
                                 </div>
                                 <div className="pricing-content">
                                     <h3 className="splt-txt wow" data-splitting>
-                                        <a href="shop-details.html">Elite Interiors</a>
+                                        <Link to="/services" onClick={()=>scrollTo(0,0)}>Elite Interiors</Link>
                                     </h3>
-                                    <p>Lorem Ipsum is simply the dummy man</p>
-                                    <h4>$19.00</h4>
+                                    <p>Architectural Design, Consultation with principal architect, Detailed site analysis and feasibility study.</p>
+                                    <Link to="/services" onClick={()=>scrollTo(0,0)}><h4>$19.00</h4></Link>
                                 </div>
                             </div>
                         </motion.div>

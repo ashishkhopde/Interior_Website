@@ -12,11 +12,11 @@ export default function AdminNavbar() {
   const location = useLocation();
 
   const navLinks = [
-    { name: "Dashboard", href: "/" },
-    { name: "Messages", href: "/message" },
-    { name: "Projects", href: "/projects" },
-    { name: "Blogs", href: "/blog" },
-    { name: "Services", href: "/services" },
+    { name: "Dashboard", href: "/admin" },
+    { name: "Messages", href: "/admin/message" },
+    { name: "Projects", href: "/admin/projects" },
+    { name: "Blogs", href: "/admin/blog" },
+    { name: "Services", href: "/admin/services" },
   ];
 
   const handleLogout = () => {
