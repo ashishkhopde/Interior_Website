@@ -18,12 +18,12 @@ const fadeUp = {
 export default function Pricing() {
 
     const plans = [
-        { icon: "flaticon-bed-1", price: "$19", name: "Basic Plan" },
-        { icon: "flaticon-room", price: "$69", name: "Hard Plan" },
-        { icon: "flaticon-blueprint-2", price: "$30", name: "Easy Plan" },
-        { icon: "flaticon-patio", price: "$32", name: "Good Plan" },
-        { icon: "flaticon-windows", price: "$29", name: "Strong Plan" },
-        { icon: "flaticon-frame-1", price: "$99", name: "Not Hard Plan" },
+        { icon: "flaticon-bed-1", price: "₹4,999", name: "Basic Plan" },
+        { icon: "flaticon-room", price: "₹24,999", name: "Hard Plan" },
+        { icon: "flaticon-blueprint-2", price: "₹14,999", name: "Easy Plan" },
+        { icon: "flaticon-patio", price: "₹70,000", name: "Good Plan" },
+        { icon: "flaticon-windows", price: "₹120,000", name: "Strong Plan" },
+        { icon: "flaticon-frame-1", price: "₹34,999", name: "Not Hard Plan" },
     ];
 
     return (

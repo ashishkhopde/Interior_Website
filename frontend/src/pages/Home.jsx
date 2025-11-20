@@ -682,128 +682,125 @@ export default function Home() {
 
             {/* Pricing Section Start */}
             <motion.section
-                className="pricing-section fix section-padding"
+                className="pricing-section fix section-padding bg-white py-20"
                 variants={fadeUp}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
             >
-                <div className="container">
+                <div className="container mx-auto px-4">
                     {/* Section Title */}
                     <motion.div
-                        className="section-title text-center"
+                        className="section-title text-center mb-12"
                         variants={fadeUp}
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true }}
                         custom={0.2}
                     >
-                        <h6 className="wow fadeInUp">Pricing Plane</h6>
-                        <h2 className="splt-txt wow" data-splitting>
+                        <h6 className="text-lg font-semibold text-gray-500 uppercase tracking-widest">
+                            Pricing Plan
+                        </h6>
+                        <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mt-2">
                             Unleash the potential <br /> of your space
                         </h2>
                     </motion.div>
 
                     {/* Pricing Grid */}
-                    <div className="row">
-                        {/* Card 1 */}
-                        <motion.div
-                            className="col-xl-3 col-lg-4 col-md-6 wow fadeInUp"
-                            data-wow-delay=".3s"
-                            variants={fadeUp}
-                            initial="hidden"
-                            whileInView="visible"
-                            viewport={{ once: true }}
-                            custom={0.3}
-                        >
-                            <div className="pricing-box-items">
-                                <div className="pricing-image">
-                                    <img src="https://modinatheme.com/oraxis/wp-content/uploads/2024/10/13-2.jpg" alt="pricing-img" />
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                        {[
+                            {
+                                title: "AesthetiCore",
+                                img: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aW50ZXJpb3IlMjBkZXNpZ258ZW58MHx8MHx8fDA%3D",
+                                desc: [
+                                    "✔ Space Layout Planning",
+                                    "✔ Color & Material Guidance",
+                                    "✔ 2 Design Revisions",
+                                    "✔ Basic Concept Moodboard",
+                                ],
+                                price: "₹80 / sq. ft.",
+                            },
+                            {
+                                title: "Luxe Living",
+                                img: "https://5.imimg.com/data5/BI/FL/NS/SELLER-20263862/residential-interior-design-service.jpg",
+                                desc: [
+                                    "✔ Architectural Design",
+                                    "✔ Project Management",
+                                    "✔ Full project management services",
+                                    "✔ Coordination with contractors",
+                                ],
+                                price: "₹150 / sq. ft.",
+                            },
+                            {
+                                title: "Artful Interiors",
+                                img: "https://i.pinimg.com/736x/60/64/12/6064126958e7136ee9c1be88f2057740.jpg",
+                                desc: [
+                                    "✔ End-to-End Design Execution & QA",
+                                    "✔ Material Selection",
+                                    "✔ Interior Styling Guidance",
+                                    "✔ Expert Consultation",
+                                ],
+                                price: "₹250 / sq. ft.",
+                            },
+                            {
+                                title: "Elite Interiors",
+                                img: "https://img.staticmb.com/mbimages/interiorDesignerCMS/decorPartner/1461/projectImage/Living-Room-Design-Ideas-by-shashi-interiors-Interior-designer-ghaziabad.jpg.webp",
+                                desc: [
+                                    "✔ Architectural Design",
+                                    "✔ Consultation with principal architect",
+                                    "✔ Site analysis & feasibility study",
+                                    "✔ Premium Support",
+                                ],
+                                price: "₹1500 / sq. ft.",
+                            },
+                        ].map((plan, i) => (
+                            <motion.div
+                                key={i}
+                                className="pricing-box-items rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 bg-white flex flex-col"
+                                data-wow-delay={`${0.3 + i * 0.2}s`}
+                                variants={fadeUp}
+                                initial="hidden"
+                                whileInView="visible"
+                                viewport={{ once: true }}
+                                custom={0.3 + i * 0.2}
+                            >
+                                <div className="pricing-image h-52 overflow-hidden">
+                                    <img
+                                        src={plan.img}
+                                        alt={plan.title}
+                                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                                    />
                                 </div>
-                                <div className="pricing-content">
-                                    <h3 className="splt-txt wow" data-splitting>
-                                        <Link to="services" onClick={()=>scrollTo(0,0)}>AesthetiCore</Link>
-                                    </h3>
-                                    <p>Interior Design, Custom design concept, Floor plan and elevations, Ideal for refreshing a single room or space</p>
-                                    <Link to="services" onClick={()=>scrollTo(0,0)}><h4>$25.00</h4></Link>
-                                </div>
-                            </div>
-                        </motion.div>
 
-                        {/* Card 2 */}
-                        <motion.div
-                            className="col-xl-3 col-lg-4 col-md-6 wow fadeInUp"
-                            data-wow-delay=".5s"
-                            variants={fadeUp}
-                            initial="hidden"
-                            whileInView="visible"
-                            viewport={{ once: true }}
-                            custom={0.5}
-                        >
-                            <div className="pricing-box-items">
-                                <div className="pricing-image">
-                                    <img src="https://modinatheme.com/oraxis/wp-content/uploads/2024/10/12-2.jpg" alt="pricing-img" />
-                                </div>
-                                <div className="pricing-content">
-                                    <h3 className="splt-txt wow" data-splitting>
-                                        <Link to="/services" onClick={()=>scrollTo(0,0)}>Luxe Living</Link>
-                                    </h3>
-                                    <p>Architectural Design, Project Management, Full project management services, Co-ordination with contractors</p>
-                                    <Link to="/services" onClick={()=>scrollTo(0,0)}><h4>$45.00</h4></Link>
-                                </div>
-                            </div>
-                        </motion.div>
+                                <div className="pricing-content flex flex-col justify-between flex-1 p-6 text-center">
+                                    <div>
+                                        <h3 className="text-2xl font-semibold text-gray-800 mb-3">
+                                            <Link to="/services" onClick={() => scrollTo(0, 0)}>
+                                                {plan.title}
+                                            </Link>
+                                        </h3>
 
-                        {/* Card 3 */}
-                        <motion.div
-                            className="col-xl-3 col-lg-4 col-md-6 wow fadeInUp"
-                            data-wow-delay=".7s"
-                            variants={fadeUp}
-                            initial="hidden"
-                            whileInView="visible"
-                            viewport={{ once: true }}
-                            custom={0.7}
-                        >
-                            <div className="pricing-box-items">
-                                <div className="pricing-image">
-                                    <img src="https://modinatheme.com/oraxis/wp-content/uploads/2024/10/11-2.jpg" alt="pricing-img" />
-                                </div>
-                                <div className="pricing-content">
-                                    <h3 className="splt-txt wow" data-splitting>
-                                        <Link to="/services" onClick={()=>scrollTo(0,0)}>Artful Interiors</Link>
-                                    </h3>
-                                    <p>End-to-End Design Execution & Quality Assurance, Material Selection & Interior Styling Guidance.</p>
-                                    <Link to="/services" onClick={()=>scrollTo(0,0)}><h4>$30.00</h4></Link>
-                                </div>
-                            </div>
-                        </motion.div>
+                                        {/* ✅ Fixed UL Tag */}
+                                        <ul className="text-gray-600 text-sm leading-relaxed space-y-1 text-left inline-block">
+                                            {plan.desc.map((feature, idx) => (
+                                                <li key={idx}>{feature}</li>
+                                            ))}
+                                        </ul>
+                                    </div>
 
-                        {/* Card 4 */}
-                        <motion.div
-                            className="col-xl-3 col-lg-4 col-md-6 wow fadeInUp"
-                            data-wow-delay=".9s"
-                            variants={fadeUp}
-                            initial="hidden"
-                            whileInView="visible"
-                            viewport={{ once: true }}
-                            custom={0.9}
-                        >
-                            <div className="pricing-box-items">
-                                <div className="pricing-image">
-                                    <img src="https://modinatheme.com/oraxis/wp-content/uploads/2024/10/13-2.jpg" alt="pricing-img" />
+                                    <Link to="/services" onClick={() => scrollTo(0, 0)}>
+                                        <h4 className="text-xl font-bold text-indigo-600 mt-6 lowercase">
+                                            {plan.price}
+                                        </h4>
+                                    </Link>
                                 </div>
-                                <div className="pricing-content">
-                                    <h3 className="splt-txt wow" data-splitting>
-                                        <Link to="/services" onClick={()=>scrollTo(0,0)}>Elite Interiors</Link>
-                                    </h3>
-                                    <p>Architectural Design, Consultation with principal architect, Detailed site analysis and feasibility study.</p>
-                                    <Link to="/services" onClick={()=>scrollTo(0,0)}><h4>$19.00</h4></Link>
-                                </div>
-                            </div>
-                        </motion.div>
+                            </motion.div>
+                        ))}
                     </div>
                 </div>
             </motion.section>
+
+
 
             {/* News Section Start */}
             <NewsSection />

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import founder from "../assets/img/founder.jpeg";
+import founder from "../assets/img/archi_nimadi.jpg";
 
 const fadeUp = {
     hidden: { opacity: 0, y: 40 },
