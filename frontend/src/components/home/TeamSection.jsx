@@ -7,8 +7,8 @@ import { Pagination, Autoplay } from "swiper/modules";
 
 
 import light from "../../assets/img/light.png"; 
-import one from "../../assets/img/team/1.jpeg"; 
-import two from "../../assets/img/team/2.jpeg"; 
+import one from "../../assets/img/team/nweaverHR.jpg"; 
+import two from "../../assets/img/team/nweaverCE.jpg"; 
 import three from "../../assets/img/team/3.jpeg"; 
 import four from "../../assets/img/team/4.jpeg"; 
 
@@ -91,9 +91,9 @@ export default function TeamSection() {
                   }}
                 >
                   <div className="team-content">
-                    <p>Founder</p>
+                    <p>HR</p>
                     <h3>
-                      <a href="team-details.html">Robert Fox</a>
+                      <a href="team-details.html">Neha Sharma</a>
                     </h3>
 
                     <div className="social-profile">
@@ -138,9 +138,9 @@ export default function TeamSection() {
                   }}
                 >
                   <div className="team-content">
-                    <p>Manager</p>
+                    <p>Civil Engineer</p>
                     <h3>
-                      <a href="team-details.html">Shikhon Islam</a>
+                      <a href="team-details.html"></a>
                     </h3>
 
                     <div className="social-profile">

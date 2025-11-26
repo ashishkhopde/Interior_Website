@@ -40,7 +40,7 @@ export default function AboutUsSection() {
                                     >
                                         <div className="about-counter-items">
                                             <h2>
-                                                <span className="count">25</span>+
+                                                <span className="count">10</span>+
                                             </h2>
                                             <h5>
                                                 Years Of <br /> experience
@@ -92,7 +92,7 @@ export default function AboutUsSection() {
 
                                                 <div className="content">
                                                     <h4>Nikhar Sharma</h4>
-                                                    <p>Founder</p>
+                                                    <p>Principal Architect</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -102,7 +102,7 @@ export default function AboutUsSection() {
                         </div>
 
                         {/* RIGHT SIDE */}
-                        <div className="col-lg-6 mt-5 mt-lg-0">
+                        <div className="col-lg-6 mt-5 mt-lg-6">
                             <div className="about-content">
                                 <div className="section-title">
                                     <motion.h6
@@ -125,7 +125,7 @@ export default function AboutUsSection() {
                                         viewport={{ once: true }}
                                         custom={0.4}
                                     >
-                                        We are a group of architects who help you build your dreams.
+                                    N Weaver Architect
                                     </motion.h2>
                                 </div>
 
@@ -138,7 +138,8 @@ export default function AboutUsSection() {
                                     viewport={{ once: true }}
                                     custom={0.5}
                                 >
-                                    Architecture and interior company must be doing some incredible work—shaping spaces that are both functional and visually stunning! Whether you're designing structures or crafting interiors, your expertise likely combines creativity.
+                                N Weaver Architect is a leading architectural  and design Architectural firm in Indore, delivering high-quality architectural planning, interior design, landscape design, real estate marketing, and 3D visualization solutions Brand design,Bim services.
+                                We believe in creating designs that balance creativity, functionality, and long-term value.                                
                                 </motion.p>
 
                                 <motion.p
@@ -150,8 +151,19 @@ export default function AboutUsSection() {
                                     viewport={{ once: true }}
                                     custom={0.7}
                                 >
-                                    Carefully crafted to suit any interior design website. Certainly, N Weaver will help you to build an out sanding period.
+                                Our team works closely with homeowners, builders, developers, and businesses to understand their vision and transform it into a unique design outcome. Every project is supported by deep research, smart space planning, and a strong aesthetic sensibility.                              
                                 </motion.p>
+
+                                <motion.p
+                                    className="mt-4 wow fadeInUp"
+                                    data-wow-delay=".7s"
+                                    variants={fadeUp}
+                                    initial="hidden"
+                                    whileInView="visible"
+                                    viewport={{ once: true }}
+                                    custom={0.7}
+                                >
+                                With a commitment to quality, client satisfaction, and on-time delivery, N Weaver Architect continues to build a reputation for excellence in the architectural industry.                                </motion.p>
 
                                 <motion.div
                                     className="about-button wow fadeInUp"
