@@ -40,10 +40,10 @@ export default function HomeHeroSection() {
       {/* Main Container */}
       <div className="container">
         <div className="row">
-          <div className="col-lg-1"></div>
+          <div className="col-lg-0"></div>
 
           {/* HERO TEXT AREA */}
-          <div className="col-lg-6">
+          <div className="col-lg-7">
             <div className="hero-content">
               <motion.h1
                 className="wow fadeInUp"
@@ -54,7 +54,7 @@ export default function HomeHeroSection() {
                 viewport={{ once: true, amount: 0.2 }}
                 custom={0.1}
               >
-                Discover Inspired <br /> <span>Interior Design</span>
+              N weaver architect <br/>Architectural firm
               </motion.h1>
 
               <motion.p

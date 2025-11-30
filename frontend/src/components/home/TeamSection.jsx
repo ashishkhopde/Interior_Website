@@ -9,8 +9,8 @@ import { Pagination, Autoplay } from "swiper/modules";
 import light from "../../assets/img/light.png"; 
 import one from "../../assets/img/team/nweaverHR.jpg"; 
 import two from "../../assets/img/team/nweaverCE.jpg"; 
-import three from "../../assets/img/team/3.jpeg"; 
-import four from "../../assets/img/team/4.jpeg"; 
+import three from "../../assets/img/archi_nimadi.jpg"; 
+import four from "../../assets/img/team/teamMember4.jpg"; 
 
 const fadeUp = {
   hidden: { opacity: 0, y: 50 },
@@ -140,7 +140,7 @@ export default function TeamSection() {
                   <div className="team-content">
                     <p>Civil Engineer</p>
                     <h3>
-                      <a href="team-details.html"></a>
+                      <a href="team-details.html">R. P. Sharma</a>
                     </h3>
 
                     <div className="social-profile">
@@ -185,9 +185,9 @@ export default function TeamSection() {
                   }}
                 >
                   <div className="team-content">
-                    <p>Manager</p>
+                    <p>Principle Architect</p>
                     <h3>
-                      <a href="team-details.html">Shikhon Islam</a>
+                      <a href="team-details.html">Nikhar Sharma</a>
                     </h3>
 
                     <div className="social-profile">
@@ -232,9 +232,9 @@ export default function TeamSection() {
                   }}
                 >
                   <div className="team-content">
-                    <p>Marketing</p>
+                    <p>Jr. Architect</p>
                     <h3>
-                      <a href="team-details.html">Dianne Russell</a>
+                      <a href="team-details.html">Sunil Patil</a>
                     </h3>
 
                     <div className="social-profile">

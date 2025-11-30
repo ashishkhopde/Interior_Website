@@ -92,7 +92,7 @@ export default function AboutUsSection() {
 
                                                 <div className="content">
                                                     <h4>Nikhar Sharma</h4>
-                                                    <p>Principal Architect</p>
+                                                    <p>Founder</p>
                                                 </div>
                                             </div>
                                         </div>

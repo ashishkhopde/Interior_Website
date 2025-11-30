@@ -27,10 +27,10 @@ export default function Footer() {
                                     <div className="footer-content">
                                         <p className='md:mx-0 mx-auto'>It is a long established fact that a reader will be distracted</p>
                                         <div className="social-icon d-flex align-items-center md:mx-0 mx-[30%]">
-                                            <a href="#"><i className="fab fa-facebook-f"></i></a>
+                                            <a href="https://www.facebook.com/Ar.Nikharsharma?mibextid=ZbWKwL"><i className="fab fa-facebook-f"></i></a>
                                             <a href="#"><i className="fab fa-twitter"></i></a>
-                                            <a href="#"><i className="fab fa-vimeo-v"></i></a>
-                                            <a href="#"><i className="fab fa-pinterest-p"></i></a>
+                                            <a href="https://www.instagram.com/nweaver_architect?igsh=ems3YnRmdms4NWNx"><i className="fab fa-instagram"></i></a>
+                                            <a href="https://in.pinterest.com/nweaverarchitect1/"><i className="fab fa-pinterest-p"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -44,11 +44,11 @@ export default function Footer() {
                                     </div>
                                     <ul className="list-items">
                                         {[
-                                            "Architecture Plus",
-                                            "Urban Oasis",
-                                            "The Design Studio",
-                                            "Blueprint Builders",
-                                            "Renovation Nation"
+                                            "architecture design",
+                                            "interior design",
+                                            "landscape design",
+                                            "Brand design",
+                                            "Construction design"
                                         ].map((item, index) => (
                                             <li key={index}>
                                                 <a href="service-details.html">
@@ -68,11 +68,11 @@ export default function Footer() {
                                     </div>
                                     <ul className="list-items">
                                         {[
-                                            "SpaceCraft Studio",
-                                            "Interiorscape Design",
-                                            "Architecture Plus",
-                                            "Dream Home Designs",
-                                            "Interior Perfection"
+                                            " Bim services",
+                                            "Real estate consultant",
+                                            "Brand design services",
+                                            "Renovation Services",
+                                            "Interior Perfection services"
                                         ].map((item, index) => (
                                             <li key={index}>
                                                 <a href="service-details.html">
@@ -142,7 +142,7 @@ export default function Footer() {
                         <div className="footer-wrapper d-flex align-items-center justify-content-between">
 
                             <p className="wow fadeInLeft color-2" data-wow-delay=".3s">
-                                © <a href="/">Modinatheme</a> 2024 | All Rights Reserved
+                                © <a href="/">N Weaver Architect</a>  | All Rights Reserved
                             </p>
 
                             <ul className="footer-menu wow fadeInRight" data-wow-delay=".5s">

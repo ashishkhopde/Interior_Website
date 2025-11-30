@@ -63,7 +63,7 @@ export default function Home() {
                                             viewport={{ once: true }}
                                             custom={0.2}
                                         >
-                                            Latest Service
+                                         Services
                                         </motion.h6>
 
                                         <motion.h2
@@ -96,13 +96,10 @@ export default function Home() {
                                                 </div>
                                                 <div className="content">
                                                     <h3 className="text-lg md:text-xl font-semibold mb-2">
-                                                        <Link to="/service-details">Interior Design</Link>
+                                                        <Link to="/service-details">Architectural design </Link>
                                                     </h3>
                                                     <p className="text-sm md:text-base mb-3 leading-relaxed">
-                                                        Interior design is the art and science of enhancing spaces
-                                                        to create functional, aesthetically pleasing environments.
-                                                        It goes beyond just decoration—it involves spatial
-                                                        planning, color psychology.
+                                                   We design spaces that are smart, strong, and built to inspire. Every structure reflects creativity, purpose, and precision.
                                                     </p>
                                                     <Link
                                                         to="/service-details"
@@ -131,14 +128,10 @@ export default function Home() {
                                                 </div>
                                                 <div className="content">
                                                     <h3 className="text-lg md:text-xl font-semibold mb-2">
-                                                        <Link to="/service-details">Landscape Architecture</Link>
+                                                        <Link to="/service-details">Interior design</Link>
                                                     </h3>
                                                     <p className="text-sm md:text-base mb-3 leading-relaxed">
-                                                        Landscape architecture is where nature meets design,
-                                                        shaping outdoor spaces that are both functional and
-                                                        visually stunning. It goes beyond planting trees and
-                                                        flowers—it involves creating environments.
-                                                    </p>
+                                                  We design spaces that are stylish, comfortable, and made to inspire. Every interior reflects creativity, warmth, and precision.                                                    </p>
                                                     <Link
                                                         to="/service-details"
                                                         className="link-btn text-sm md:text-base"
@@ -166,14 +159,10 @@ export default function Home() {
                                                 </div>
                                                 <div className="content">
                                                     <h3 className="text-lg md:text-xl font-semibold mb-2">
-                                                        <Link to="/service-details">Construction Design</Link>
+                                                        <Link to="/service-details">Landscape design </Link>
                                                     </h3>
                                                     <p className="text-sm md:text-base mb-3 leading-relaxed">
-                                                        Construction design is about translating architectural
-                                                        concepts into functional, buildable structures. It covers
-                                                        everything from site planning to material selection and
-                                                        sustainability.
-                                                    </p>
+                                                    We design outdoor spaces that are natural, refreshing, and built to inspire. Every landscape reflects beauty, balance, and precision.                                                    </p>
                                                     <Link
                                                         to="/service-details"
                                                         className="link-btn text-sm md:text-base"
@@ -199,7 +188,7 @@ export default function Home() {
                                 custom={0.9}
                             >
                                 <div
-                                    className="service-image bg-cover rounded-2xl h-[350px] md:h-[450px] lg:h-[100%] w-full"
+                                    className="service-image bg-cover rounded-2xl h-[350px] md:h-[450px]w-full"
                                     style={{
                                         backgroundImage:
                                             "url('https://modinatheme.com/oraxis/wp-content/uploads/2024/10/01-6.jpg')",

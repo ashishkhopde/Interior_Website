@@ -184,7 +184,7 @@ export default function Contact() {
                                                         <h3 className="splt-txt wow" data-splitting>
                                                             Website
                                                         </h3>
-                                                        <h6>www.example.com</h6>
+                                                        <h6>https://www.nweaverarchitect.in/</h6>
                                                     </div>
                                                 </div>
                                             </motion.div>
